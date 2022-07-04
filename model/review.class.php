@@ -1,14 +1,17 @@
 <?php
-// klasa koja predstavlja trgovinu
+// klasa koja predstavlja recenziju
 
-class Store
+class Review
 {
-  protected $id, $name;
+  protected $id, $store_id, $user_id, $comment, $rating;
 
-  function __construct($id, $ime)
+  function __construct($id, $id_trgovine, $id_korisnika, $komentar, $ocjena)
   {
     $this->id = $id;
-    $this->name = $ime;
+    $this->store_id = $id_trgovine;
+    $this->user_id = $id_korisnika;
+    $this->comment = $komentar;
+    $this->rating = $ocjena;
   }
 
   //omogućavaju nam pristupanje protected podacima
@@ -29,8 +32,9 @@ class Store
       return $this->$property;
     }
   }
-
 };
+
+
 
 
  ?>
