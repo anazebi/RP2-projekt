@@ -14,13 +14,13 @@ exit( 0 );
 function has_table( $tblname )
 {
 	$db = DB::getConnection();
-	
+
 	try
 	{
 		$st = $db->query( 'SELECT DATABASE()' );
 		$dbname = $st->fetch()[0];
 
-		$st = $db->prepare( 
+		$st = $db->prepare(
 			'SELECT * FROM information_schema.tables WHERE table_schema = :dbname AND table_name = :tblname LIMIT 1' );
 		$st->execute( ['dbname' => $dbname, 'tblname' => $tblname] );
 		if( $st->rowCount() > 0 )
@@ -37,11 +37,11 @@ function create_table_korisnici()
 	$db = DB::getConnection();
 
 	if( has_table( 'korisnici' ) )
-		exit( 'Tablica korisnici vec postoji. Pokusajte ju izbrisati i pokrenuti ponovno.' );
+		exit( 'Tablica korisnici već postoji! Prije ponovnog pokušaja izbrišite tablicu.' );
 
 	try
 	{
-		$st = $db->prepare( 
+		$st = $db->prepare(
 			'CREATE TABLE IF NOT EXISTS korisnici (' .
 			'id int NOT NULL PRIMARY KEY AUTO_INCREMENT,' .
 			'username varchar(30) NOT NULL UNIQUE,' .
@@ -64,11 +64,11 @@ function create_table_prozvodi()
 	$db = DB::getConnection();
 
 	if( has_table( 'proizvodi' ) )
-		exit( 'Tablica proizvodi vec postoji. Pokusajte ju izbrisati i pokrenuti ponovno.' );
+		exit( 'Tablica proizvodi već postoji! Prije ponovnog pokušaja izbrišite tablicu.' );
 
 	try
 	{
-		$st = $db->prepare( 
+		$st = $db->prepare(
 			'CREATE TABLE IF NOT EXISTS proizvodi (' .
 			'id int NOT NULL PRIMARY KEY AUTO_INCREMENT,' .
 			'id_trgovina int NOT NULL,' .
@@ -90,14 +90,14 @@ function create_table_trgovine()
 	$db = DB::getConnection();
 
 	if( has_table( 'trgovine' ) )
-		exit( 'Tablica trgovine vec postoji. Pokusajte ju izbrisati i pokrenuti ponovno.' );
+		exit( 'Tablica trgovine već postoji! Prije ponovnog pokušaja izbrišite tablicu.');
 
 	try
 	{
-		$st = $db->prepare( 
+		$st = $db->prepare(
 			'CREATE TABLE IF NOT EXISTS trgovine (' .
 			'id int NOT NULL PRIMARY KEY AUTO_INCREMENT,' .
-			'naziv varchar(100) NOT NULL)' 
+			'naziv varchar(100) NOT NULL)'
 		);
 
 		$st->execute();
@@ -112,17 +112,17 @@ function create_table_recenzije()
 	$db = DB::getConnection();
 
 	if( has_table( 'recenzije' ) )
-		exit( 'Tablica recenzije vec postoji. Pokusajte ju izbrisati i pokrenuti ponovno.' );
+		exit('Tablica recenzija već postoji! Prije ponovnog pokušaja izbrišite tablicu.');
 
 	try
 	{
-		$st = $db->prepare( 
+		$st = $db->prepare(
 			'CREATE TABLE IF NOT EXISTS recenzije (' .
 			'id int NOT NULL PRIMARY KEY AUTO_INCREMENT,' .
 			'id_trgovina int NOT NULL,' .
 			'id_korisnik int NOT NULL,' .
 			'ocjena INT,' .
-			'review varchar(500))' 
+			'review varchar(500))'
 		);
 
 		$st->execute();
@@ -131,4 +131,4 @@ function create_table_recenzije()
 
 	echo "Napravljena tablica recenzije.<br />";
 }
-?> 
+?>
