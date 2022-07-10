@@ -101,6 +101,8 @@ class Service{
           }
         }
       }
+
+      return $products;
     }
 
     //sortiranje proizvoda silazno po cijeni
@@ -126,7 +128,11 @@ class Service{
           }
         }
       }
+
+      return $products;
     }
+
+
 
 };
 ?>
