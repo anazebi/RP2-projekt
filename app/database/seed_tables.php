@@ -15,15 +15,15 @@ function seed_table_korisnici()
 	$db = DB::getConnection();
 	try
 	{
-		$st = $db->prepare( 'INSERT INTO korisnici(username, password_hash, email, reg_sifra, registriran) VALUES (:username, :password, \'i@d.com\', \'idc\', \'1\')' );
+		$st = $db->prepare( 'INSERT INTO korisnici(username, password_hash, email, reg_sifra, registriran) VALUES (:username, :password, :email, \'idc\', \'1\')' );
 
-		$st->execute( array( 'username' => 'maja', 'password' => password_hash( 'majinasifra', PASSWORD_DEFAULT ) ) );
-		$st->execute( array( 'username' => 'nikola', 'password' => password_hash( 'nikolinasifra', PASSWORD_DEFAULT ) ) );
-		$st->execute( array( 'username' => 'ana', 'password' => password_hash( 'aninasifra', PASSWORD_DEFAULT ) ) );
-		$st->execute( array( 'username' => 'josipa', 'password' => password_hash( 'josipinasifra', PASSWORD_DEFAULT ) ) );
-		$st->execute( array( 'username' => 'ivan', 'password' => password_hash( 'ivanovasifra', PASSWORD_DEFAULT ) ) );
-		$st->execute( array( 'username' => 'ante', 'password' => password_hash( 'antinasifra', PASSWORD_DEFAULT ) ) );
-		$st->execute( array( 'username' => 'silvija', 'password' => password_hash( 'silvijinasifra', PASSWORD_DEFAULT ) ) );
+		$st->execute( array( 'username' => 'maja', 'password' => password_hash( 'majinasifra', PASSWORD_DEFAULT ), 'email' => 'maja@mail.com' ) );
+		$st->execute( array( 'username' => 'nikola', 'password' => password_hash( 'nikolinasifra', PASSWORD_DEFAULT ), 'email' => 'nikola@mail.com' ) );
+		$st->execute( array( 'username' => 'ana', 'password' => password_hash( 'aninasifra', PASSWORD_DEFAULT ), 'email' => 'ana@mail.com' ) );
+		$st->execute( array( 'username' => 'josipa', 'password' => password_hash( 'josipinasifra', PASSWORD_DEFAULT ), 'email' => 'josipa@mail.com' ) );
+		$st->execute( array( 'username' => 'ivan', 'password' => password_hash( 'ivanovasifra', PASSWORD_DEFAULT ), 'email' => 'ivan@mail.com' ) );
+		$st->execute( array( 'username' => 'ante', 'password' => password_hash( 'antinasifra', PASSWORD_DEFAULT ), 'email' => 'ante@mail.com' ) );
+		$st->execute( array( 'username' => 'silvija', 'password' => password_hash( 'silvijinasifra', PASSWORD_DEFAULT ), 'email' => 'silvija@mail.com' ) );
 	}
 	catch( PDOException $e ) { exit( "PDO error [insert korisnici]: " . $e->getMessage() ); }
 
@@ -35,57 +35,57 @@ function seed_table_proizvodi()
 	$db = DB::getConnection();
 	try
 	{
-		$st = $db->prepare( 'INSERT INTO proizvodi(id_trgovina, ime, akcija, cijena) VALUES (:id_trgovina, :ime, :akcija, :cijena)' );
+		$st = $db->prepare( 'INSERT INTO proizvodi(id_trgovina, ime, popust, cijena) VALUES (:id_trgovina, :ime, :popust, :cijena)' );
 
-		$st->execute( array( 'id_trgovina' => 1, 'ime' => 'Breskva', 'akcija' => 15, 'cijena' => 12.99) );
-		$st->execute( array( 'id_trgovina' => 1, 'ime' => 'Kava', 'akcija' => 20, 'cijena' => 34.99) );
-		$st->execute( array( 'id_trgovina' => 1, 'ime' => 'Svinjska lopatica', 'akcija' => NULL, 'cijena' => 21.99 ) );
-		$st->execute( array( 'id_trgovina' => 1, 'ime' => 'Mlijeko', 'akcija' => NULL, 'cijena' => 8.49) );
-		$st->execute( array( 'id_trgovina' => 1, 'ime' => 'Mortadela', 'akcija' => 10, 'cijena' => 49.90) );
-		$st->execute( array( 'id_trgovina' => 1, 'ime' => 'Lovački kruh', 'akcija' => NULL, 'cijena' => 9.79) );
+		$st->execute( array( 'id_trgovina' => 1, 'ime' => 'Breskva', 'popust' => 15, 'cijena' => 12.99) );
+		$st->execute( array( 'id_trgovina' => 1, 'ime' => 'Kava', 'popust' => 20, 'cijena' => 34.99) );
+		$st->execute( array( 'id_trgovina' => 1, 'ime' => 'Svinjska lopatica', 'popust' => NULL, 'cijena' => 21.99 ) );
+		$st->execute( array( 'id_trgovina' => 1, 'ime' => 'Mlijeko', 'popust' => NULL, 'cijena' => 8.49) );
+		$st->execute( array( 'id_trgovina' => 1, 'ime' => 'Mortadela', 'popust' => 10, 'cijena' => 49.90) );
+		$st->execute( array( 'id_trgovina' => 1, 'ime' => 'Lovački kruh', 'popust' => NULL, 'cijena' => 9.79) );
 
-		$st->execute( array( 'id_trgovina' => 2, 'ime' => 'Breskva', 'akcija' => 10, 'cijena' => 13.49) );
-		$st->execute( array( 'id_trgovina' => 2, 'ime' => 'Kava', 'akcija' => NULL, 'cijena' => 38.59) );
-		$st->execute( array( 'id_trgovina' => 2, 'ime' => 'Svinjska lopatica', 'akcija' => 10, 'cijena' => 17.99 ) );
-		$st->execute( array( 'id_trgovina' => 2, 'ime' => 'Mlijeko', 'akcija' => NULL, 'cijena' => 8.49) );
-		$st->execute( array( 'id_trgovina' => 2, 'ime' => 'Mortadela', 'akcija' => NULL, 'cijena' => 52.90) );
-		$st->execute( array( 'id_trgovina' => 2, 'ime' => 'Lovački kruh', 'akcija' => 5, 'cijena' => 9.29) );
+		$st->execute( array( 'id_trgovina' => 2, 'ime' => 'Breskva', 'popust' => 10, 'cijena' => 13.49) );
+		$st->execute( array( 'id_trgovina' => 2, 'ime' => 'Kava', 'popust' => NULL, 'cijena' => 38.59) );
+		$st->execute( array( 'id_trgovina' => 2, 'ime' => 'Svinjska lopatica', 'popust' => 10, 'cijena' => 17.99 ) );
+		$st->execute( array( 'id_trgovina' => 2, 'ime' => 'Mlijeko', 'popust' => NULL, 'cijena' => 8.49) );
+		$st->execute( array( 'id_trgovina' => 2, 'ime' => 'Mortadela', 'popust' => NULL, 'cijena' => 52.90) );
+		$st->execute( array( 'id_trgovina' => 2, 'ime' => 'Lovački kruh', 'popust' => 5, 'cijena' => 9.29) );
 
-		$st->execute( array( 'id_trgovina' => 3, 'ime' => 'Breskva', 'akcija' => NULL, 'cijena' => 14.99) );
-		$st->execute( array( 'id_trgovina' => 3, 'ime' => 'Kava', 'akcija' => 25, 'cijena' => 30.99) );
-		$st->execute( array( 'id_trgovina' => 3, 'ime' => 'Svinjska lopatica', 'akcija' => 20, 'cijena' => 16.99 ) );
-		$st->execute( array( 'id_trgovina' => 3, 'ime' => 'Mlijeko', 'akcija' => NULL, 'cijena' => 8.99) );
-		$st->execute( array( 'id_trgovina' => 3, 'ime' => 'Mortadela', 'akcija' => NULL, 'cijena' => 55.90) );
-		$st->execute( array( 'id_trgovina' => 3, 'ime' => 'Lovački kruh', 'akcija' => NULL, 'cijena' => 8.99) );
+		$st->execute( array( 'id_trgovina' => 3, 'ime' => 'Breskva', 'popust' => NULL, 'cijena' => 14.99) );
+		$st->execute( array( 'id_trgovina' => 3, 'ime' => 'Kava', 'popust' => 25, 'cijena' => 30.99) );
+		$st->execute( array( 'id_trgovina' => 3, 'ime' => 'Svinjska lopatica', 'popust' => 20, 'cijena' => 16.99 ) );
+		$st->execute( array( 'id_trgovina' => 3, 'ime' => 'Mlijeko', 'popust' => NULL, 'cijena' => 8.99) );
+		$st->execute( array( 'id_trgovina' => 3, 'ime' => 'Mortadela', 'popust' => NULL, 'cijena' => 55.90) );
+		$st->execute( array( 'id_trgovina' => 3, 'ime' => 'Lovački kruh', 'popust' => NULL, 'cijena' => 8.99) );
 
-		$st->execute( array( 'id_trgovina' => 4, 'ime' => 'Breskva', 'akcija' => NULL, 'cijena' => 13.99) );
-		$st->execute( array( 'id_trgovina' => 4, 'ime' => 'Kava', 'akcija' => 10, 'cijena' => 36.99) );
-		$st->execute( array( 'id_trgovina' => 4, 'ime' => 'Svinjska lopatica', 'akcija' => NULL, 'cijena' => 20.99 ) );
-		$st->execute( array( 'id_trgovina' => 4, 'ime' => 'Mlijeko', 'akcija' => NULL, 'cijena' => 7.99) );
-		$st->execute( array( 'id_trgovina' => 4, 'ime' => 'Mortadela', 'akcija' => NULL, 'cijena' => 58.90) );
-		$st->execute( array( 'id_trgovina' => 4, 'ime' => 'Lovački kruh', 'akcija' => 20, 'cijena' => 7.99) );
+		$st->execute( array( 'id_trgovina' => 4, 'ime' => 'Breskva', 'popust' => NULL, 'cijena' => 13.99) );
+		$st->execute( array( 'id_trgovina' => 4, 'ime' => 'Kava', 'popust' => 10, 'cijena' => 36.99) );
+		$st->execute( array( 'id_trgovina' => 4, 'ime' => 'Svinjska lopatica', 'popust' => NULL, 'cijena' => 20.99 ) );
+		$st->execute( array( 'id_trgovina' => 4, 'ime' => 'Mlijeko', 'popust' => NULL, 'cijena' => 7.99) );
+		$st->execute( array( 'id_trgovina' => 4, 'ime' => 'Mortadela', 'popust' => NULL, 'cijena' => 58.90) );
+		$st->execute( array( 'id_trgovina' => 4, 'ime' => 'Lovački kruh', 'popust' => 20, 'cijena' => 7.99) );
 
-		$st->execute( array( 'id_trgovina' => 5, 'ime' => 'Jabuka', 'akcija' => 15, 'cijena' => 5.99) );
-		$st->execute( array( 'id_trgovina' => 5, 'ime' => 'Kava', 'akcija' => NULL, 'cijena' => 39.99) );
-		$st->execute( array( 'id_trgovina' => 5, 'ime' => 'Svinjska lopatica', 'akcija' => 20, 'cijena' => 16.99 ) );
-		$st->execute( array( 'id_trgovina' => 5, 'ime' => 'Mlijeko', 'akcija' => 5, 'cijena' => 7.99) );
-		$st->execute( array( 'id_trgovina' => 5, 'ime' => 'Mortadela', 'akcija' => NULL, 'cijena' => 58.90) );
-		$st->execute( array( 'id_trgovina' => 5, 'ime' => 'Lovački kruh', 'akcija' => NULL, 'cijena' => 10.79) );
+		$st->execute( array( 'id_trgovina' => 5, 'ime' => 'Jabuka', 'popust' => 15, 'cijena' => 5.99) );
+		$st->execute( array( 'id_trgovina' => 5, 'ime' => 'Kava', 'popust' => NULL, 'cijena' => 39.99) );
+		$st->execute( array( 'id_trgovina' => 5, 'ime' => 'Svinjska lopatica', 'popust' => 20, 'cijena' => 16.99 ) );
+		$st->execute( array( 'id_trgovina' => 5, 'ime' => 'Mlijeko', 'popust' => 5, 'cijena' => 7.99) );
+		$st->execute( array( 'id_trgovina' => 5, 'ime' => 'Mortadela', 'popust' => NULL, 'cijena' => 58.90) );
+		$st->execute( array( 'id_trgovina' => 5, 'ime' => 'Lovački kruh', 'popust' => NULL, 'cijena' => 10.79) );
 
-		$st->execute( array( 'id_trgovina' => 6, 'ime' => 'Jabuka', 'akcija' => NULL, 'cijena' => 7.99) );
-		$st->execute( array( 'id_trgovina' => 6, 'ime' => 'Kava', 'akcija' => NULL, 'cijena' => 39.99) );
-		$st->execute( array( 'id_trgovina' => 6, 'ime' => 'Svinjska lopatica', 'akcija' => NULL, 'cijena' => 25.99 ) );
-		$st->execute( array( 'id_trgovina' => 6, 'ime' => 'Mlijeko', 'akcija' => NULL, 'cijena' => 8.49) );
-		$st->execute( array( 'id_trgovina' => 6, 'ime' => 'Mortadela', 'akcija' => 10, 'cijena' => 48.90) );
-		$st->execute( array( 'id_trgovina' => 6, 'ime' => 'Lovački kruh', 'akcija' => 20, 'cijena' => 6.99) );
-		$st->execute( array( 'id_trgovina' => 6, 'ime' => 'Breskva', 'akcija' => 15, 'cijena' => 11.99) );
+		$st->execute( array( 'id_trgovina' => 6, 'ime' => 'Jabuka', 'popust' => NULL, 'cijena' => 7.99) );
+		$st->execute( array( 'id_trgovina' => 6, 'ime' => 'Kava', 'popust' => NULL, 'cijena' => 39.99) );
+		$st->execute( array( 'id_trgovina' => 6, 'ime' => 'Svinjska lopatica', 'popust' => NULL, 'cijena' => 25.99 ) );
+		$st->execute( array( 'id_trgovina' => 6, 'ime' => 'Mlijeko', 'popust' => NULL, 'cijena' => 8.49) );
+		$st->execute( array( 'id_trgovina' => 6, 'ime' => 'Mortadela', 'popust' => 10, 'cijena' => 48.90) );
+		$st->execute( array( 'id_trgovina' => 6, 'ime' => 'Lovački kruh', 'popust' => 20, 'cijena' => 6.99) );
+		$st->execute( array( 'id_trgovina' => 6, 'ime' => 'Breskva', 'popust' => 15, 'cijena' => 11.99) );
 
-		$st->execute( array( 'id_trgovina' => 7, 'ime' => 'Breskva', 'akcija' => 25, 'cijena' => 9.99) );
-		$st->execute( array( 'id_trgovina' => 7, 'ime' => 'Kava', 'akcija' => 25, 'cijena' => 28.99) );
-		$st->execute( array( 'id_trgovina' => 7, 'ime' => 'Svinjska lopatica', 'akcija' => 25, 'cijena' => 16.99 ) );
-		$st->execute( array( 'id_trgovina' => 7, 'ime' => 'Mlijeko', 'akcija' => NULL, 'cijena' => 8.99) );
-		$st->execute( array( 'id_trgovina' => 7, 'ime' => 'Mortadela', 'akcija' => NULL, 'cijena' => 55.49) );
-		$st->execute( array( 'id_trgovina' => 7, 'ime' => 'Lovački kruh', 'akcija' => NULL, 'cijena' => 10.29) );
+		$st->execute( array( 'id_trgovina' => 7, 'ime' => 'Breskva', 'popust' => 25, 'cijena' => 9.99) );
+		$st->execute( array( 'id_trgovina' => 7, 'ime' => 'Kava', 'popust' => 25, 'cijena' => 28.99) );
+		$st->execute( array( 'id_trgovina' => 7, 'ime' => 'Svinjska lopatica', 'popust' => 25, 'cijena' => 16.99 ) );
+		$st->execute( array( 'id_trgovina' => 7, 'ime' => 'Mlijeko', 'popust' => NULL, 'cijena' => 8.99) );
+		$st->execute( array( 'id_trgovina' => 7, 'ime' => 'Mortadela', 'popust' => NULL, 'cijena' => 55.49) );
+		$st->execute( array( 'id_trgovina' => 7, 'ime' => 'Lovački kruh', 'popust' => NULL, 'cijena' => 10.29) );
 
 	}
 	catch( PDOException $e ) { exit( "PDO error [proizvodi]: " . $e->getMessage() ); }
@@ -102,7 +102,7 @@ function seed_table_trgovine()
 
 		$st->execute( array( 'naziv' => 'Plodine') );
 		$st->execute( array( 'naziv' => 'Konzum') );
-		$st->execute( array( 'Naziv' => 'Lidl') );
+		$st->execute( array( 'naziv' => 'Lidl') );
 		$st->execute( array( 'naziv' => 'Interspar') );
 		$st->execute( array( 'naziv' => 'Birota') );
 		$st->execute( array( 'naziv' => 'Tommy') );

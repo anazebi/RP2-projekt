@@ -3,8 +3,8 @@
 
 require_once __DIR__ . '/db.class.php';
 
-create_table_korisnici();
 create_table_proizvodi();
+create_table_korisnici();
 create_table_trgovine();
 create_table_recenzije();
 
@@ -55,11 +55,11 @@ function create_table_korisnici()
 	}
 	catch( PDOException $e ) { exit( "PDO error [create korisnici]: " . $e->getMessage() ); }
 
-	echo "Napravljena tablica korisnici.<br />";
+	echo "Napravljena tablica korisnici.<br>";
 }
 
 
-function create_table_prozvodi()
+function create_table_proizvodi()
 {
 	$db = DB::getConnection();
 
@@ -73,7 +73,7 @@ function create_table_prozvodi()
 			'id int NOT NULL PRIMARY KEY AUTO_INCREMENT,' .
 			'id_trgovina int NOT NULL,' .
             'ime varchar(50) NOT NULL,' .
-			'akcija INT,' .
+			'popust INT,' .
             'cijena decimal(15,2) NOT NULL)'
 		);
 
@@ -104,7 +104,7 @@ function create_table_trgovine()
 	}
 	catch( PDOException $e ) { exit( "PDO error [create trgovine]: " . $e->getMessage() ); }
 
-	echo "Napravljena tablica trgovine.<br />";
+	echo "Napravljena tablica trgovine.<br>";
 }
 
 function create_table_recenzije()
@@ -129,6 +129,6 @@ function create_table_recenzije()
 	}
 	catch( PDOException $e ) { exit( "PDO error [create recenzije]: " . $e->getMessage() ); }
 
-	echo "Napravljena tablica recenzije.<br />";
+	echo "Napravljena tablica recenzije.<br>";
 }
 ?>
