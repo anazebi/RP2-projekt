@@ -3,12 +3,12 @@
 
 class Product
 {
-  protected $id, $store_name, $store_id, $sale, $price;
+  protected $id, $product_name, $store_id, $sale, $price;
 
-  function construct($id, $id_trgovine, $ime_trgovine, $popust, $cijena)
+  function construct($id, $id_trgovine, $ime_proizvoda, $popust, $cijena)
   {
     $this->id = $id;
-    $this->store_name = $this->ime_trgovine;
+    $this->product_name = $this->ime_proizvoda;
     $this->store_id = $id_trgovine;
     $this->sale = $popust;
     $this->price = $cijena;
@@ -33,9 +33,5 @@ class Product
     }
   }
 };
-
-
-
-
 
  ?>

@@ -5,7 +5,7 @@ require_once __DIR__ .'/product.class.php';
 require_once __DIR__ .'/review.class.php';
 require_once __DIR__ .'/user.class.php';
 
-
+//klasa service za interakciju aplikacije i baze podataka
 class Service{
 
     // funkcija za dohvat proizvoda po identifikatoru, koristimo je u iducim funkcijama za dohvat podataka da smanjimo nepotrebna ponavljanja u kodu
@@ -132,7 +132,58 @@ class Service{
       return $products;
     }
 
+    // funkcija koja dohvaca trgovinu po identifikatoru
+    //koristimo u narednim funkcijama za dohvat trgovina
+    public static function getStoreById($id_store)
+    {
+      $db = DB::getConnection();
+      $st = $db->prepare('SELECT * FROM trgovine WHERE id = :id');
+      $st->execute(['id' => $id_store]);
 
+      $row = $st->fetch();
+      $name_store = $row['name'];
+
+      $trgovina = New Store($id_store, $name_store);
+
+      return $trgovina;
+    }
+
+    //funkcija za dohvat svih trgovina
+    public static function getAllStores()
+    {
+      $db = DB::getConnection();
+      $st = $db->prepare('SELECT * FROM trgovine');
+      $st->execute([]);
+
+      $trgovine = [];
+      while($row = $st->fetch())
+      {
+          $id_store = $row['id'];
+          $trgovine[] = Service::getStoreById($id_store);
+      }
+      return $trgovine;
+    }
+
+    //funkcija za dohvat svih proizvoda u trgovini
+    public static function getAllProductsInStore($id_store)
+    {
+      $db = DB::getConnection();
+      $st = $db->prepare('SELECT * FROM proizvodi WHERE id_trgovina = :id');
+      $st->execute(['id' => $id_store]);
+
+      $proizvodi = [];
+      while($row = $st->fetch())
+      {
+        $id_proizvoda = $row['id'];
+        $ime_proizvoda = $row['ime'];
+        $popust = $row['popust'];
+        $cijena = $row['cijena'];
+
+        $proizvod = New Product($id_proizvoda, $id_store, $ime_proizvoda, $popust, $cijena);
+        $proizvodi[] = $proizvod;
+      }
+      return $proizvodi;
+    }
 
 };
 ?>
