@@ -71,7 +71,7 @@ class Service{
       if($product->sale === null)
         $final_price = $product->price;
       else {
-        $popust = $product->price * $product->sale;
+        $popust = $product->price * ($product->sale / 100);
         $final_price = $product->price - $popust;
       }
 
