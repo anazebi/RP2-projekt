@@ -197,6 +197,72 @@ class Service{
       return $onsale;
     }
 
+    //vraca ukupnu cijenu proizvoda u kosarici
+    public static function getCheck($products)
+    {
+      $final_price = 0;
+      foreach ($products as $product) {
+        $final_price += Service::getFinalPrice($product);
+      }
+      return $final_price;
+    }
+
+    //provjerava jesu li svi proizvodi s popisa dostupni u odredenoj trgovini
+    //koristimo pri racunanju najjeftinije kosarice i odredivanju najpovoljnije trgovine za dane proizvode
+    public static function ProductsAvalaibleInStore($products, $store_id)
+    {
+      $dostupno = 0;
+
+      foreach ($products as $product) {
+        $allstores = Service::getProductByName($product->name)
+        foreach ($allstores as $product_store) {
+          if($product_store->id_trgovine === $store_id) $dostupno = 1;
+          else break;
+        }
+        if($dostupno === 0) return 0;
+        else $dostupno = 0;
+      }
+      return 1;
+    }
+
+    //koristimo samo ako PorductsAvaliableInStore($products, $store_id) = 1
+    public static function getProductsFromStore($products, $store_id)
+    {
+      $allproducts = Service::getAllProductsInStore($store_id);
+      $products_store = [];
+
+      foreach ($allproducts as $product_store) {
+        foreach ($products as $product) {
+          if ($product->product_name === $product_store->product_name)
+          {
+            $products_store[] = $product_store;
+            break;
+          }
+        }
+      }
+      return $products_store;
+    }
+
+    //za određeni proizvod/proizvode vracamo ime trgovine s najnizom ukupnom cijenom i tu cijenu
+    public static function getCheapestStore($products)
+    {
+      $allstores = Service::getAllStores();
+      $final_price = 0;
+
+      foreach ($allstores as $store) {
+        if(ProductsAvalaibleInStore($products, $store->id))
+        {
+          $products_store = Service::getProductsFromStore($products, $store->id);
+          $price = Service::getFinalPrice($products_store);
+          if($price < $final_price || $final_price ===0)
+          {
+            $final_price = $price;
+            $cheapest_store = $store->name;
+          }
+        }
+      }
+      return $rezultat = array('cheapest store' => $cheapest_store, 'final price' => $final_price);
+    }
 
 
 };
