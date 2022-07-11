@@ -14,13 +14,13 @@ class ProductsController{
 
     public function search()
     {
-        require_once __DIR__.'/../view/search_index.php';
+        require_once __DIR__.'/../view/products_search.php';
     }
 
     public function searchProducts()
     {
-        if(isset($_POST['search'])){
-            $traziPo = $_POST['search'];
+        if(isset($_POST['search_product'])){
+            $traziPo = $_POST['search_product'];
             $trazeno = Service::getProductsByName($traziPo);
             require_once __DIR__.'/../view/products_index.php';
         }

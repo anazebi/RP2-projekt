@@ -6,6 +6,7 @@ require_once __DIR__ . '/_headerNav.php';
 <br>
 
 <ul class = "products">
+
   
 </ul>
 
