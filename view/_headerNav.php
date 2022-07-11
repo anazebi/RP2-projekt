@@ -3,9 +3,10 @@
   <head>
     <meta charset="utf-8">
     <title>Špeceraj</title>
-    <link rel = "stylesheet" href=__DIR__ . "/../css/master.css">
+    <link rel = "stylesheet" href="css/master.css">
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-    <script type = "text/javascript" src=__DIR__ . "/../javascript/naslovnica.js"></script>
+    <script type = "text/javascript" src="javascript/naslovnica.js"></script>
+    <script type = "text/javascript" src="javascript/funkcije.js"></script>
   </head>
   <body>
 
