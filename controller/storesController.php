@@ -5,8 +5,8 @@ class StoresController{
 
     public function index()
     {
-        $sve_trgovine = Service::getAllStores();
-        require_once __DIR__ . '/../view/trgovine_index.php';
+        $sveTrgovine = Service::getAllStores();
+        require_once __DIR__ . '/../view/stores_index.php';
     }
 
     public function sviProizvodi()
@@ -40,7 +40,7 @@ class StoresController{
         $najboljaTrgovina = Service::getCheapestStoreAndPrice($sve);
         $trgovina = $najboljaTrgovina[0];
         $cijena = $najboljaTrgovina[1];
-        require_once __DIR__ . '/../view/kosarica_index.php';
+        require_once __DIR__ . '/../view/products_kosarica.php';
     }
 };
 

@@ -30,27 +30,27 @@ require_once __DIR__ . '/../model/service.class.php';
   </form>
 
 <?php
-    foreach($products as $jedan){
+foreach($products as $jedan){
 ?>
-      <p class = "popis">
-          <?php
-          echo '<p id = "proizvod_' . $jedan->id . '">' . $jedan->product_name . '</p>';
-          if ($jedan->sale !== null)
-          {
-            $nova = Service::getFinalPrice($jedan);
-            echo '<span class="novo">-' . $jedan->sale . '% </span>';
-            echo '<p class="akcija">' . $jedan->price . 'kn</p>';
-            echo '<button id="' . $jedan->id . '"class = "dodaj" onClick = "dodaj_proizvod(this.id)">' . 'Dodaj u košaricu</button>';
-            echo '</a>';
-            echo '  Sada samo: <span class = "novo">' . $nova . 'kn</span></li>';
-          }
-          else{
-            echo '<p>' . $jedan->price . 'kn</p>';
-            echo '<button id="' . $jedan->id . '"class = "dodaj" onClick = "dodaj_proizvod(this.id)">'.'Dodaj u košaricu</button>';
-            echo '</a>';
-          }
-          ?>
-      </p>
+  <p class = "popis">
     <?php
+    echo '<p id = "proizvod_' . $jedan->id . '">' . $jedan->product_name . '</p>';
+    if ($jedan->sale !== null)
+    {
+      $nova = Service::getFinalPrice($jedan);
+      echo '<span class="novo">-' . $jedan->sale . '% </span>';
+      echo '<p class="akcija">' . $jedan->price . 'kn</p>';
+      echo '<button id="' . $jedan->id . '"class = "dodaj" onClick = "dodaj_proizvod(this.id)">' . 'Dodaj u košaricu</button>';
+      echo '</a>';
+      echo '  Sada samo: <span class = "novo">' . $nova . 'kn</span></li>';
+    }
+    else{
+      echo '<p>' . $jedan->price . 'kn</p>';
+      echo '<button id="' . $jedan->id . '"class = "dodaj" onClick = "dodaj_proizvod(this.id)">'.'Dodaj u košaricu</button>';
+      echo '</a>';
     }
     ?>
+  </p>
+<?php
+}
+?>
