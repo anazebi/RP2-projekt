@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__.'/../model/service.class.php';
 
-class TrgovineController{
+class StoresController{
 
     public function index()
     {
@@ -36,7 +36,7 @@ class TrgovineController{
     public function najboljaCijena()
     {
         $sve = $_GET['data'];
-        $proizvodi = explode(',',$p); 
+        $proizvodi = explode(',',$p);
         $najboljaTrgovina = Service::getCheapestStoreAndPrice($sve);
         $trgovina = $najboljaTrgovina[0];
         $cijena = $najboljaTrgovina[1];
