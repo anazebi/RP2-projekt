@@ -356,6 +356,7 @@ class Service{
       catch(PDOException $e) { exit( "PDO error: " . $e->getMessage()); }
     }
 
+    //dohvaćanje recenzije po identifikatoru
     public static function getReviewById($review_id)
     {
       $db = DB::getConnection();
@@ -372,6 +373,7 @@ class Service{
       return $rezultat;
     }
 
+    //dohvaćanje svih recenzija za određenu trgovinu
     public static function getStoreReviews($store_id)
     {
       $db = DB::getConnection();
@@ -384,7 +386,6 @@ class Service{
           $recenzija = Service::getReviewById($row['id']);
           $store_reviews[] = $recenzija;
       }
-
       return $store_reviews;
     }
 
