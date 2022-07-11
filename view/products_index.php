@@ -6,11 +6,8 @@ require_once __DIR__ . '/_headerNav.php';
     <?php
 
     if($imeTrgovine!== "")
-<<<<<<< HEAD
-        echo 'Proizvodi koji su dostupni u  <strong style="color:DarkGreen">'.$ime_trgovine.'</strong>';
-=======
-        echo 'Proizvodi koji su dostupni u  <strong style="color:DarkGreen">'.$imeTrgovine.'</strong>';      
->>>>>>> 610d7814ad07080030f40c326a73b4de9f62bef2
+        echo 'Proizvodi koji su dostupni u  <strong style="color:DarkGreen">'.$imeTrgovine.'</strong>';
+
 
     ?>
 </strong>
