@@ -317,6 +317,45 @@ class Service{
       return $rezultat = array('cheapest store' => $cheapest_store, 'final price' => $final_price);
     }
 
+    //dohvacanje korisnika po identifikatoru
+    public static function getUserbyId($user_id)
+    {
+      $db = DB::getConnection();
+      $st = $db->prepare('SELECT * FROM korisnici WHERE id = :id');
+      $st->excute(array('id' => $user_id));
+      $row = $st->fetch();
+
+      $username = $row['username'];
+      $password_hash = $row['password_hash'];
+      $email = $row['email'];
+      $reg_sifra = $row['reg_sifra'];
+      $registriran = $row['registriran'];
+
+      return New User($user_id, $username, $password_hash, $email, $reg_sifra, $registriran);
+    }
+
+    //dohvaćanje korisnika po korisnickom imenu
+    public static function getUserbyName($username)
+    {
+      $db = DB::getConnection();
+      $st = $db->prepare('SELECT * FROM korisnici WHERE username = :username');
+      $st->excute(array('username' => $username));
+      $row = $st->fetch();
+
+      return Service::getUserById($row['id']);
+    }
+
+    //dodavanje recenzije u bazu podataka
+    public static function addReview($review, $rating, $user_id, $store_id)
+    {
+      try{
+        $db = DB::getConnection();
+        $st = $db->prepare( 'INSERT INTO recenzije(id_trgovina, id_korisnik, ocjena, review) VALUES (:id_trgovina, :id_user, :ocjena, :komentar)' );
+        $st->execute( array('id_trgovina' => $store_id, 'id_user' => $user_id, 'ocjena' =>$rating , 'komentar' => $review));
+      }
+      catch(PDOException $e) { exit( "PDO error: " . $e->getMessage()); }
+     }
+
 
 };
 ?>

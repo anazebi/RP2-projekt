@@ -11,7 +11,8 @@ class User
     $this->username = $korisnickoime;
     $this->password_hash = $sifra;
     $this->email = $mail;
-    $this->registration_sequence = $registriran;
+    $this->registration_sequence = $reg_seq;
+    $this->has_registered = $registriran;
   }
 
   //omogućavaju nam pristupanje protected podacima
