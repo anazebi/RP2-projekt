@@ -196,9 +196,9 @@ class Service{
       	$st->execute(['name' => $name]);
 	
 	$row = $st->fetch();
-      	$name_store = $row['id'];
+      	$id = $row['id'];
 
-      	$trgovina = new Store($id_store, $name_store);
+      	$trgovina = new Store($id, $name);
 
       	return $trgovina;
 	
