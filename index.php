@@ -6,6 +6,7 @@
   // index.php?rt=con/action, onda ćemo pozvati
   // funkciju action iz kontrolera conController.php.
 
+//ako nije postavljen kontroler, pozivamo akciju index iz indexController 
 if(isset($_GET['rt']))
 {
   $route = $_GET['rt'];
