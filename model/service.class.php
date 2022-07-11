@@ -37,7 +37,7 @@ class Service{
     //funkcija za registraciju novog korisnika
     public static function Register($username, $password, $email){
         $db = DB::getConnection();
-        $st = $db->prepare( 'INSERT INTO projekt_users(username, password_hash, email, registration_sequence, has_registered) VALUES (:username, :password, :email, \"idc\", \"1\")' );
+        $st = $db->prepare( 'INSERT INTO korisnici(username, password_hash, email, reg_sifra, registriran) VALUES (:username, :password, :email, "idc", "1")' );
         $st->execute(array( 'username' => $username, 'password' => password_hash( $password, PASSWORD_DEFAULT ), 'email' => $email));
 
         if($st->rowCount() !== 1){
