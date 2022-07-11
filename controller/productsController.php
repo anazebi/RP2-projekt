@@ -49,18 +49,15 @@ class ProductsController{
             $idTrgovine = Service::getStoreByName($imeTrgovine);
             $proizvodi = Service::getAllProductsOnSale($idTrgovine);
         }
-<<<<<<< HEAD
 
         else if($pretraga !== "" && $imeTrgovine==="" && $akcija === ""){
-            $trazeno = Service::getProductByName($pretraga);
+            $proizvodi = Service::getProductByName($pretraga);
         }
 
         else{
             $proizvodi = Service::getProductsOnSale();
         }
-=======
-        //else{...}
->>>>>>> a64130b4d9fc3c8404da9fd6e1f24b58a399fd48
+
 
         if($akcija === 'uzlazno'){
             $trazeno = Service::sortByPriceASC($proizvodi);
