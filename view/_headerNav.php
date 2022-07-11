@@ -6,14 +6,14 @@
     <link rel = "stylesheet" href="css/master.css">
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script type = "text/javascript" src="javascript/naslovnica.js"></script>
-    <script type = "text/javascript" src="javascript/funkcije.js"></script>
+    <script type = "text/javascript" src="javascript/usermode.js"></script>
   </head>
   <body>
 
     <?php
     // koristimo javascript canvas da bismo po slici postavljenoj u zaglavlju ispisali ime nase stranice
      ?>
-    <canvas id="canvas" width="300" height="300"></canvas>
+    <canvas id="canvas" width="$(window).width()+50" height="300" style="position:relative; top:0; left:0;"></canvas>
     <nav id = "navigacija">
       <ul>
         <li> <a href = "index.php?rt=index/index"> Ovotjedne akcije </a> </li>
@@ -30,30 +30,30 @@
       session_start();
     }
 
-    if(isset($_SESSION['logged']))
+    if(isset($_SESSION['login']))
     {
-      if($_SESSION['logged'] === true)
+      if($_SESSION['login'] === true)
       {
       ?>
-        <button type="button" name="signout"> Sign out </button>
+        <button type="button" id="signout"> Sign out </button>
         <br><br>
       <?php
       }
       else
       {
       ?>
-        <button type="button" name="signin"> Sign in </button>
+        <button type="button" id="signin"> Sign in </button>
         <br><br>
-        <button type="button" name="register"> Register </button>
+        <button type="button" id="register"> Register </button>
       <?php
       }
     }
     else
     {
     ?>
-      <button type="button" name="signin"> Sign in </button>
+      <button type="button" id="signin"> Sign in </button>
       <br><br>
-      <button type="button" name="register"> Register </button>
+      <button type="button" id="register"> Register </button>
     <?php
     }
     ?>

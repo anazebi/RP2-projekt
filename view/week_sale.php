@@ -1,6 +1,14 @@
 <?php
-
 require_once __DIR__ . '/_headerNav.php';
-require_once __DIR__ . '/_footer.php';
+?>
 
+<hr>
+<br>
+
+<ul class = "products">
+  
+</ul>
+
+<?php
+require_once __DIR__ . '/_footer.php';
  ?>
