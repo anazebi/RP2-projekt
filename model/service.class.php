@@ -253,7 +253,7 @@ class Service{
         if(ProductsAvalaibleInStore($products, $store->id))
         {
           $products_store = Service::getProductsFromStore($products, $store->id);
-          $price = Service::getFinalPrice($products_store);
+          $price = Service::getCheck($products_store);
           if($price < $final_price || $final_price ===0)
           {
             $final_price = $price;
