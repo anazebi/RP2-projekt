@@ -6,7 +6,11 @@ class IndexController
 {
   public function index()
   {
-    $week_sale = Service::getProductsOnSale();
+    $products = Service::getProductsOnSale();
+    $imeTrgovine = "";
+    $sort = "";
+    $sale = true;
+    $search = "";
     require_once __DIR__ . '/../view/products_index.php';
   }
 };
