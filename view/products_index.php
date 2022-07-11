@@ -34,7 +34,7 @@ require_once __DIR__ . '/../model/service.class.php';
 ?>
       <p class = "popis">
           <?php
-          echo '<p id = "proiz' . $jedan->ime . '</p>';
+          echo '<p id = "proizvod_' . $jedan->id . '">' . $jedan->product_name . '</p>';
           if ($jedan->sale !== null)
           {
             $nova = Service::getFinalPrice($jedan);
@@ -42,7 +42,7 @@ require_once __DIR__ . '/../model/service.class.php';
             echo '<p class="akcija">' . $jedan->price . 'kn</p>';
             echo '<button id="' . $jedan->id . '"class = "dodaj" onClick = "dodaj_proizvod(this.id)">' . 'Dodaj u košaricu</button>';
             echo '</a>';
-            echo 'Sada samo: <span class = "novo">' . $nova . 'kn</span></li>';
+            echo '  Sada samo: <span class = "novo">' . $nova . 'kn</span></li>';
           }
           else{
             echo '<p>' . $jedan->price . 'kn</p>';
