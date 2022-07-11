@@ -49,12 +49,12 @@ class LoginController
         header('Location: index.php?rt=products/index');
       }
       else {
-        echo "Registracija neuspješna! Unesite drugo korisničko ime ili email adresu.";
+        echo "Registracija neuspješna! Unesite drugo korisničko ime ili email adresu.<br><br>";
         require_once __DIR__ . '/../view/login_register.php';
       }
     }
     else {
-      require_once __DIR__ . '/../view/login_index.php';
+      require_once __DIR__ . '/../view/login_register.php';
     }
   }
 
