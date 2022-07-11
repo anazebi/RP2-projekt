@@ -1,11 +1,12 @@
 <?php
 require_once __DIR__.'/../model/service.class.php';
+session_start();
 
 class ProductsController{
 
     public function index()
     {
-        $username=$_GET['username'];
+        $username=$_SESSION['username'];
         $id_user = Service::getUserbyName($username);
         $sviNaAkciji = Service::getProductsOnSale();
         require_once __DIR__.'/../view/products_index.php';
@@ -46,7 +47,7 @@ class ProductsController{
             $idTrgovine = Service::getStoreByName($imeTrgovine);
             $proizvodi = Service::getAllProductsOnSale($idTrgovine);
         }
-        else{...}
+        //else{...}
 
         if($akcija === 'uzlazno'){
             $sortirani = Service::sortByPriceASC($proizvodi);
