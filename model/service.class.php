@@ -55,8 +55,8 @@ class Service{
     }
 
     //logout korisnika
-    function logout(){
-      
+    function Logout(){
+
         session_unset();
         session_destroy();
     }
