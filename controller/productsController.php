@@ -8,13 +8,12 @@ class ProductsController{
         $username=$_GET['username'];
         $id_user = Service::getUserbyName($username);
         $trazeno = Service::getProductsOnSale();
-        $imeTrgovine = "";
         require_once __DIR__.'/../view/products_index.php';
     }
 
     public function search()
     {
-        require_once __DIR__.'/../view/products_index.php';
+        require_once __DIR__.'/../view/search_index.php';
     }
 
     public function searchProducts()
@@ -58,12 +57,12 @@ class ProductsController{
             $proizvodi = Service::getProductsOnSale();
         }
 
-        if($akcija === 'uzlazno'){
-            $trazeno = Service::sortByPriceASC($proizvodi);
+        if($nacin === 'silazno'){
+            $trazeno = Service::sortByPriceDESC($proizvodi);
         }
 
         else{
-            $trazeno = Service::sortByPriceDESC($proizvodi);
+            $trazeno = Service::sortByPriceASC($proizvodi);
         }
 
         require_once __DIR__.'/../view/products_index.php';
