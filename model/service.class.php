@@ -354,8 +354,39 @@ class Service{
         $st->execute( array('id_trgovina' => $store_id, 'id_user' => $user_id, 'ocjena' =>$rating , 'komentar' => $review));
       }
       catch(PDOException $e) { exit( "PDO error: " . $e->getMessage()); }
-     }
+    }
 
+    public static function getReviewById($review_id)
+    {
+      $db = DB::getConnection();
+      $st = $db->prepare('SELECT * FROM recenzije WHERE id = :id');
+      $st->execute(array('id' = > $review_id));
+
+      $row = $st->fetch();
+      $id_trgovina = $row['id_trgovina'];
+      $id_korisnik = $row['id_korisnik'];
+      $ocjena = $row['ocjena'];
+      $review = $row['review'];
+
+      $rezultat = New Review($review_id, $id_trgovina, $id_korisnik, $review, $ocjena);
+      return $rezultat;
+    }
+
+    public static function getStoreReviews($store_id)
+    {
+      $db = DB::getConnection();
+      $st = $db->prepare('SELECT * FROM recenzije WHERE id_trgovina = :store_id');
+      $st->execute(array('id_trgovina' => $store_id));
+
+      $store_reviews = [];
+      while($row = $st->fetch())
+      {
+          $recenzija = Service::getReviewById($row['id']);
+          $store_reviews[] = $recenzija;
+      }
+
+      return $store_reviews;
+    }
 
 };
 ?>
