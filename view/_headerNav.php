@@ -31,9 +31,9 @@
       session_start();
     }
 
-    if(isset($_SESSION['login']))
+    if(isset($_SESSION['logged']))
     {
-      if($_SESSION['login'] === true)
+      if($_SESSION['logged'] === true)
       {
       ?>
         <button type="button" id="signout"> Sign out </button>
