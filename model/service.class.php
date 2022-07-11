@@ -4,6 +4,7 @@ require_once __DIR__ . '/../app/database/db.class.php';
 require_once __DIR__ .'/product.class.php';
 require_once __DIR__ .'/review.class.php';
 require_once __DIR__ .'/user.class.php';
+require_once __DIR__ .'/store.class.php';
 
 //klasa service za interakciju aplikacije i baze podataka
 class Service{
@@ -72,7 +73,7 @@ class Service{
         $id_proizvoda = $row['id'];
         $id_trgovine = $row['id_trgovina'];
         $ime_proizvoda = $row['ime'];
-        $popust = $row['akcija'];
+        $popust = $row['popust'];
         $cijena = $row['cijena'];
 
         $proizvod = new Product($id_proizvoda, $id_trgovine, $ime_proizvoda, $popust, $cijena);
@@ -94,9 +95,9 @@ class Service{
         //korisniku dopustamo da unese tek neku od rijeci iz imena proizvoda te mu vracamo sve proizvode koji sadrze danu rijec u imenu
         //npr za unos kruh u trazilicu korisnik dobiva na raspolaganje i crni i bijeli kruh
         $ime_baza = strtolower($row['ime']);
-        if(strpos($ime_baza, $ime_trazilica))
+        if(strpos($ime_baza, $ime_trazilica) !== false)
         {
-          $products[] = DB::getProductById($row['id']);
+          $products[] = Service::getProductById($row['id']);
         }
       }
       return $products;
@@ -124,10 +125,9 @@ class Service{
       if($product->sale === null)
         $final_price = $product->price;
       else {
-        $popust = $product->price * ($product->sale / 100);
+        $popust = $product->price * ($product->sale/100);
         $final_price = $product->price - $popust;
       }
-
       return $final_price;
     }
 
@@ -135,12 +135,13 @@ class Service{
     public static function sortByPriceASC($products)
     {
       $duljina_liste = count($products);
+      $promjena = 1;
 
       while($promjena !== 0)
       {
         $promjena = 0;
 
-        for($i = 0; i < $duljina_liste - 1; $i++)
+        for($i = 0; $i < $duljina_liste - 1; $i++)
         {
           $price_i = Service::getFinalPrice($products[$i]);
           $price_iplus = Service::getFinalPrice($products[$i + 1]);
@@ -162,12 +163,13 @@ class Service{
     public static function sortByPriceDESC($products)
     {
       $duljina_liste = count($products);
+      $promjena = 1;
 
       while($promjena !== 0)
       {
         $promjena = 0;
 
-        for($i = 0; i < $duljina_liste - 1; $i++)
+        for($i = 0; $i < $duljina_liste - 1; $i++)
         {
           $price_i = Service::getFinalPrice($products[$i]);
           $price_iplus = Service::getFinalPrice($products[$i + 1]);
@@ -194,9 +196,9 @@ class Service{
       $st->execute(['id' => $id_store]);
 
       $row = $st->fetch();
-      $name_store = $row['name'];
+      $name_store = $row['naziv'];
 
-      $trgovina = New Store($id_store, $name_store);
+      $trgovina = new Store($id_store, $name_store);
 
       return $trgovina;
     }
@@ -242,7 +244,7 @@ class Service{
       $broj_proizvoda = count($allproducts);
       $onsale = [];
 
-      for($i = 0; i < $broj_proizvoda; $i++)
+      for($i = 0; $i < $broj_proizvoda; $i++)
       {
         if($allproducts[$i]->sale !== null)
           $onsale[] = $allproducts[$i];
@@ -266,11 +268,10 @@ class Service{
     {
       $dostupno = 0;
 
-      foreach ($products as $product) {
-        $allstores = Service::getProductByName($product->name)
-        foreach ($allstores as $product_store) {
-          if($product_store->id_trgovine === $store_id) $dostupno = 1;
-          else break;
+      foreach($products as $product) {
+        $allstores = Service::getProductByName($product->product_name);
+        foreach($allstores as $product_store) {
+          if($product_store->store_id == $store_id) $dostupno = 1;
         }
         if($dostupno === 0) return 0;
         else $dostupno = 0;
@@ -297,13 +298,13 @@ class Service{
     }
 
     //za određeni proizvod/proizvode vracamo ime trgovine s najnizom ukupnom cijenom i tu cijenu
-    public static function getCheapestStore($products)
+    public static function getCheapestStoreAndPrice($products)
     {
       $allstores = Service::getAllStores();
       $final_price = 0;
 
       foreach ($allstores as $store) {
-        if(ProductsAvalaibleInStore($products, $store->id))
+        if(Service::ProductsAvalaibleInStore($products, $store->id))
         {
           $products_store = Service::getProductsFromStore($products, $store->id);
           $price = Service::getCheck($products_store);
@@ -322,7 +323,7 @@ class Service{
     {
       $db = DB::getConnection();
       $st = $db->prepare('SELECT * FROM korisnici WHERE id = :id');
-      $st->excute(array('id' => $user_id));
+      $st->execute(array('id' => $user_id));
       $row = $st->fetch();
 
       $username = $row['username'];
@@ -331,7 +332,7 @@ class Service{
       $reg_sifra = $row['reg_sifra'];
       $registriran = $row['registriran'];
 
-      return New User($user_id, $username, $password_hash, $email, $reg_sifra, $registriran);
+      return new User($user_id, $username, $password_hash, $email, $reg_sifra, $registriran);
     }
 
     //dohvaćanje korisnika po korisnickom imenu
@@ -339,7 +340,7 @@ class Service{
     {
       $db = DB::getConnection();
       $st = $db->prepare('SELECT * FROM korisnici WHERE username = :username');
-      $st->excute(array('username' => $username));
+      $st->execute(array('username' => $username));
       $row = $st->fetch();
 
       return Service::getUserById($row['id']);
@@ -361,7 +362,7 @@ class Service{
     {
       $db = DB::getConnection();
       $st = $db->prepare('SELECT * FROM recenzije WHERE id = :id');
-      $st->execute(array('id' = > $review_id));
+      $st->execute(array('id' => $review_id));
 
       $row = $st->fetch();
       $id_trgovina = $row['id_trgovina'];
@@ -369,7 +370,7 @@ class Service{
       $ocjena = $row['ocjena'];
       $review = $row['review'];
 
-      $rezultat = New Review($review_id, $id_trgovina, $id_korisnik, $review, $ocjena);
+      $rezultat = new Review($review_id, $id_trgovina, $id_korisnik, $review, $ocjena);
       return $rezultat;
     }
 
@@ -378,7 +379,7 @@ class Service{
     {
       $db = DB::getConnection();
       $st = $db->prepare('SELECT * FROM recenzije WHERE id_trgovina = :store_id');
-      $st->execute(array('id_trgovina' => $store_id));
+      $st->execute(array('store_id' => $store_id));
 
       $store_reviews = [];
       while($row = $st->fetch())
