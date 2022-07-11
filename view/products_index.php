@@ -1,14 +1,14 @@
-<?php 
-require_once __DIR__ . '/_header.php'; 
+<?php
+require_once __DIR__ . '/_headerNav.php';
 ?>
 
 <strong class="podnaslov">
-    <?php 
+    <?php
 
-    if($im_trgovine!== "")
-        echo 'Proizvodi koji su dostupni u  <strong style="color:DarkGreen">'.$ime_trgovine.'</strong>';      
+    if($imeTrgovine!== "")
+        echo 'Proizvodi koji su dostupni u  <strong style="color:DarkGreen">'.$ime_trgovine.'</strong>';
 
-    ?> 
+    ?>
 </strong>
 
 <strong class="trazenje">
@@ -27,7 +27,7 @@ require_once __DIR__ . '/_header.php';
 ?>
             <form action="index.php?rt=products/sortiraj&ime=<?php echo $ime_trgovine ?>&traziPo=<?php echo $traziPo ?>
             &akcija=<?php echo $akcija ?>" method="post">
-            <strong class="podnaslov" > Sortiraj po: 
+            <strong class="podnaslov" > Sortiraj po:
             <select name="nacin">
                             <option value="uzlazno"> Cijena uzlazno </option>
                             <option value="silazno"> Cijena silazno </option>
@@ -37,9 +37,9 @@ require_once __DIR__ . '/_header.php';
         <br><br>
         <?php
             foreach($trazeno as $product)
-            {                
+            {
                 echo '<li class="products">';
-                echo '<p id = "pr_'.$product->id.'">'.$product->name.'</p>';               
+                echo '<p id = "pr_'.$product->id.'">'.$product->name.'</p>';
                 if ($product->akcija !== null)
                 {
                     $newPrice = round($product->price - ($product->akcija/100)*$product->price, 2);
@@ -48,13 +48,13 @@ require_once __DIR__ . '/_header.php';
                     echo '<button id="'.$product->id.'"class = "dodajUkosaricu" onClick="dodaj_proizvod(this.id)">'.'Dodaj u košaricu</button>';
                     echo '</a>';
                     echo 'Sada samo: <span class="novo">'.$newPrice.'kn</span></li>';
-                    
+
                 }
                 else{
                     echo '<p>'.$product->price.'kn</p>';
                     echo '<button id="'.$product->id.'"class = "dodajUkosaricu" onClick="dodaj_proizvod(this.id)">'.'Dodaj u košaricu</button>';
                     echo '</a>';
-                }   
+                }
             }
     }
 
@@ -62,4 +62,3 @@ require_once __DIR__ . '/_header.php';
     </ul>
 
 <?php  require_once __DIR__ . '/_footer.php' ?>
-
