@@ -61,7 +61,7 @@ class LoginController
   public function logout()
   {
     $_SESSION['logged'] = false;
-    Service::logout();
+    Service::Logout();
     header('Location: index.php');
   }
 };

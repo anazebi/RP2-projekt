@@ -186,23 +186,22 @@ class Service{
 
       return $products;
     }
-	
 
-
+  //dhvaćanje trgovine prema imenu
 	public function getStoreByName($name)
 	{
 	$db = DB::getConnection();
       	$st = $db->prepare('SELECT * FROM trgovine WHERE name = :name');
       	$st->execute(['name' => $name]);
-	
+
 	$row = $st->fetch();
       	$id = $row['id'];
 
       	$trgovina = new Store($id, $name);
 
       	return $trgovina;
-	
 	}
+
     // funkcija koja dohvaca trgovinu po identifikatoru
     //koristimo u narednim funkcijama za dohvat trgovina
     public static function getStoreById($id_store)
@@ -404,6 +403,21 @@ class Service{
           $store_reviews[] = $recenzija;
       }
       return $store_reviews;
+    }
+
+    //računanje prosječne ocjene za trgovinu()
+    public static function getStoreRating($store_name)
+    {
+      $store = Service::getStoreByName($store_name);
+      $reviews = Service::getStoreReviews($store->id);
+
+      $broj_recenzija = count($reviews);
+      $zbroj_ocjena = 0;
+      for($i = 0; $i < $broj_recenzija; $i++)
+      {
+        $zbroj_ocjena += $reviews[i]->rating;
+      }
+      return $zbroj_ocjena / $broj_recenzija;
     }
 
 };
