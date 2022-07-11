@@ -8,19 +8,19 @@ class ProductsController{
     {
         $username=$_SESSION['username'];
         $id_user = Service::getUserbyName($username);
-        $sviNaAkciji = Service::getProductsOnSale();
+        $trazeno = Service::getProductsOnSale();
         require_once __DIR__.'/../view/products_index.php';
     }
 
     public function search()
     {
-        require_once __DIR__.'/../view/products_search.php';
+        require_once __DIR__.'/../view/search_index.php';
     }
 
     public function searchProducts()
     {
-        if(isset($_POST['search_product'])){
-            $traziPo = $_POST['search_product'];
+        if(isset($_POST['search'])){
+            $traziPo = $_POST['search'];
             $trazeno = Service::getProductsByName($traziPo);
             require_once __DIR__.'/../view/products_index.php';
         }
@@ -34,8 +34,10 @@ class ProductsController{
         $imeTrgovine = $_GET['ime_trgovine'];
         $akcija = $_GET['akcija'];
         $nacin = $_POST['nacin'];
+        $pretraga = "";
+        $pretraga = $_POST['pretraga'];
         $proizvodi = [];
-        $sortirani = [];
+        $trazeno = [];
 
         if($imeTrgovine !== "" && $akcija !== ""){
             $idTrgovine = Service::getStoreByName($imeTrgovine);
@@ -47,13 +49,25 @@ class ProductsController{
             $idTrgovine = Service::getStoreByName($imeTrgovine);
             $proizvodi = Service::getAllProductsOnSale($idTrgovine);
         }
+<<<<<<< HEAD
+
+        else if($pretraga !== "" && $imeTrgovine==="" && $akcija === ""){
+            $trazeno = Service::getProductByName($pretraga);
+        }
+
+        else{
+            $proizvodi = Service::getProductsOnSale();
+        }
+=======
         //else{...}
+>>>>>>> a64130b4d9fc3c8404da9fd6e1f24b58a399fd48
 
         if($akcija === 'uzlazno'){
-            $sortirani = Service::sortByPriceASC($proizvodi);
+            $trazeno = Service::sortByPriceASC($proizvodi);
         }
+        
         else{
-            $sortirani = Service::sortByPriceDESC($proizvodi);
+            $trazeno = Service::sortByPriceDESC($proizvodi);
         }
 
         require_once __DIR__.'/../view/products_index.php';
