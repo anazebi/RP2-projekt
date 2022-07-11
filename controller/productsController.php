@@ -1,12 +1,11 @@
 <?php
 require_once __DIR__.'/../model/service.class.php';
-session_start();
 
 class ProductsController{
 
     public function index()
     {
-        $username=$_SESSION['username'];
+        $username=$_GET['username'];
         $id_user = Service::getUserbyName($username);
         $trazeno = Service::getProductsOnSale();
         require_once __DIR__.'/../view/products_index.php';
@@ -35,7 +34,7 @@ class ProductsController{
         $akcija = $_GET['akcija'];
         $nacin = $_POST['nacin'];
         $pretraga = "";
-        $pretraga = $_POST['pretraga'];
+        $pretraga = $_GET['pretraga'];
         $proizvodi = [];
         $trazeno = [];
 
@@ -51,18 +50,17 @@ class ProductsController{
         }
 
         else if($pretraga !== "" && $imeTrgovine==="" && $akcija === ""){
-            $proizvodi = Service::getProductByName($pretraga);
+            $trazeno = Service::getProductByName($pretraga);
         }
 
         else{
             $proizvodi = Service::getProductsOnSale();
         }
 
-
         if($akcija === 'uzlazno'){
             $trazeno = Service::sortByPriceASC($proizvodi);
         }
-        
+
         else{
             $trazeno = Service::sortByPriceDESC($proizvodi);
         }
