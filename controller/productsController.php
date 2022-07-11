@@ -3,67 +3,82 @@ require_once __DIR__.'/../model/service.class.php';
 
 class ProductsController{
 
+    //funkcija koja će prikazivati view sa proizvodima na akciji
+    //tri ce funkcije pozivati isti view pa cemo u ovisnosti o sadržaju varijabli $imeTrgovine, $sort, $sale i $search znati koje porizvode prikazati
+    //products_index dobiva listu proizvoda za prikaz u $products te prije navedene varijable
     public function index()
     {
-        $username=$_GET['username'];
-        $id_user = Service::getUserbyName($username);
-        $trazeno = Service::getProductsOnSale();
+        $products = Service::getProductsOnSale();
         $imeTrgovine = "";
+        $sort = "";
+        $sale = true;
+        $search = "";
         require_once __DIR__.'/../view/products_index.php';
     }
 
     public function search()
     {
-        require_once __DIR__.'/../view/products_index.php';
+        require_once __DIR__.'/../view/products_search.php';
     }
 
+    // pronalazi trazene proizvode i poziva pripadni view
     public function searchProducts()
     {
         if(isset($_POST['search'])){
-            $traziPo = $_POST['search'];
-            $trazeno = Service::getProductsByName($traziPo);
+            $search = $_POST['search'];
+            $products = Service::getProductsByName($search);
+            $imeTrgovine = "";
+            $sort = "";
+            $sale = false;
             require_once __DIR__.'/../view/products_index.php';
         }
         else{
-            require_once __DIR__.'/../view/search_index.php';
+            require_once __DIR__.'/../view/products_search.php';
         }
     }
 
+    // prikazuje sve proizvode iz dane trgovine
+    // ako je postavljen $sale na true tada prikazuje samo prozvode na akciji
+    // ako je postavljen $sort onda proizvode prikazuje sortirano na nacin zapisan u varijabli
+    // ako je postavljen $search tada onda prikazuje samo proizvode s danim imenom
     public function sortiraj()
     {
-        $imeTrgovine = $_GET['ime_trgovine'];
-        $akcija = $_GET['akcija'];
-        $nacin = $_POST['nacin'];
-        $pretraga = "";
-        $pretraga = $_GET['pretraga'];
-        $proizvodi = [];
-        $trazeno = [];
+        $imeTrgovine = $_GET['imeTrgovine'];
+        $sale = $_GET['sale'];
+        $sort = $_POST['sort'];
+        $search = "";
+        $search = $_GET['search'];
 
-        if($imeTrgovine !== "" && $akcija !== ""){
-            $idTrgovine = Service::getStoreByName($imeTrgovine);
-            $proizvodi = Service::getProductsOnSaleInStore($idTrgovine);
+        $products = [];
+
+        // ako je $sale true i $imeTrgovine postavljeno prikazujemo samo proizvode na akicji iz dane trgovine
+        if($imeTrgovine !== "" && $sale !== false){
+            $store = Service::getStoreByName($imeTrgovine);
+            $store_id = $store->id;
+            $products = Service::getProductsOnSaleInStore($store_id);
         }
-
+        // ako je $sale false i $imeTrgovine postavljeno prikazujemo sve proizvode iz trgovine $imeTrgovine
         else if($imeTrgovine !== "")
         {
-            $idTrgovine = Service::getStoreByName($imeTrgovine);
-            $proizvodi = Service::getAllProductsOnSale($idTrgovine);
+            $store = Service::getStoreByName($imeTrgovine);
+            $store_id = $store->id;
+            $proizvodi = Service::getAllProductsInStore($store_id);
         }
-
-        else if($pretraga !== "" && $imeTrgovine==="" && $akcija === ""){
-            $trazeno = Service::getProductByName($pretraga);
+        //ako je postavljen kriterij pretrage po imenu proizvoda
+        else if($search !== "" && $imeTrgovine==="" && $sale === false){
+            $products = Service::getProductByName($search);
         }
-
+        // inace jednostavno dohvacamo sve proizvode na akciji
         else{
-            $proizvodi = Service::getProductsOnSale();
+            $products = Service::getProductsOnSale();
         }
 
-        if($akcija === 'uzlazno'){
-            $trazeno = Service::sortByPriceASC($proizvodi);
+        // ako je postavljen kriterij sortiranja dobivene proizvode sortiramo
+        if($sort === 'uzlazno'){
+            $products = Service::sortByPriceASC($products);
         }
-
-        else{
-            $trazeno = Service::sortByPriceDESC($proizvodi);
+        else if ($sort === "silazno"){
+            $products = Service::sortByPriceDESC($products);
         }
 
         require_once __DIR__.'/../view/products_index.php';
@@ -71,7 +86,7 @@ class ProductsController{
 
     public function kosarica()
     {
-        require_once __DIR__.'/../view/kosarica_index.php';
+        require_once __DIR__.'/../view/products_kosarica.php';
     }
 }
 

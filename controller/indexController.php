@@ -7,7 +7,7 @@ class IndexController
   public function index()
   {
     $week_sale = Service::getProductsOnSale();
-    require_once __DIR__ . '/../view/week_sale.php';
+    require_once __DIR__ . '/../view/products_index.php';
   }
 };
 
