@@ -37,9 +37,8 @@ class ProductsController{
         }
     }
 
-    // prikazuje sve proizvode iz dane trgovine
+    // sortirano prikazuje sve proizvode iz dane trgovine
     // ako je postavljen $sale na true tada prikazuje samo prozvode na akciji
-    // ako je postavljen $sort onda proizvode prikazuje sortirano na nacin zapisan u varijabli
     // ako je postavljen $search tada onda prikazuje samo proizvode s danim imenom
     public function sortiraj()
     {
