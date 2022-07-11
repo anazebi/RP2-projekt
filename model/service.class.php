@@ -8,6 +8,59 @@ require_once __DIR__ .'/user.class.php';
 //klasa service za interakciju aplikacije i baze podataka
 class Service{
 
+    //funkcija za login korisnika
+    public static function Login($username, $password){
+
+        $db = DB::getConnection();
+        $st = $db->prepare('SELECT password_hash FROM korisnici WHERE username = :username');
+        $st->execute(['username' => $username]);
+
+        if( $st->rowCount() !== 1){
+            $proceed = false;
+        }
+        elseif(password_verify( $password, $st->fetch()["password_hash"])){
+            $proceed = true;
+        }
+        else{
+            $proceed = false;
+        }
+
+        if($proceed){
+            $secret_word = 'PogodiAkoSiFaca';
+            $_SESSION['login'] = $username . ',' . md5( $username . $secret_word);
+            $_SESSION['username'] = $username;
+        }
+        return $proceed;
+    }
+
+    //funkcija za registraciju novog korisnika
+    public static function Register($username, $password, $email){
+        $db = DB::getConnection();
+        $st = $db->prepare( 'INSERT INTO projekt_users(username, password_hash, email, registration_sequence, has_registered) VALUES (:username, :password, :email, \"idc\", \"1\")' );
+        $st->execute(array( 'username' => $username, 'password' => password_hash( $password, PASSWORD_DEFAULT ), 'email' => $email));
+
+        if($st->rowCount() !== 1){
+            $proceed = false;
+        }
+        else{
+            $proceed = true;
+        }
+
+        if($proceed){
+            $secret_word = 'PogodiAkoSiFaca';
+            $_SESSION['login'] = $username . ',' . md5( $username . $secret_word);
+            $_SESSION['username'] = $username;
+        }
+        return $proceed;
+    }
+
+    //logout korisnika
+    function logout(){
+      
+        session_unset();
+        session_destroy();
+    }
+
     // funkcija za dohvat proizvoda po identifikatoru, koristimo je u iducim funkcijama za dohvat podataka da smanjimo nepotrebna ponavljanja u kodu
     public static function getProductById($id_product)
     {
