@@ -5,8 +5,8 @@ require_once __DIR__ . '/_header.php';
 <strong class="podnaslov">
     <?php 
 
-    if($im_trgovine!== "")
-        echo 'Proizvodi koji su dostupni u  <strong style="color:DarkGreen">'.$ime_trgovine.'</strong>';      
+    if($imeTrgovine!== "")
+        echo 'Proizvodi koji su dostupni u  <strong style="color:DarkGreen">'.$imeTrgovine.'</strong>';      
 
     ?> 
 </strong>
@@ -25,7 +25,7 @@ require_once __DIR__ . '/_header.php';
         if($trazeno !== $temp)
         {
 ?>
-            <form action="index.php?rt=products/sortiraj&ime=<?php echo $ime_trgovine ?>&traziPo=<?php echo $traziPo ?>
+            <form action="index.php?rt=products/sortiraj&ime=<?php echo $imeTrgovine ?>&traziPo=<?php echo $traziPo ?>
             &akcija=<?php echo $akcija ?>" method="post">
             <strong class="podnaslov" > Sortiraj po: 
             <select name="nacin">
