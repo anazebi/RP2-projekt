@@ -2,9 +2,9 @@
 //korisnik pristupa samo skripti index.php
 //na osnovu parametara postavljenih u superglobalnoj varijabli $_GET['rt'] radimo preusmjeravanje na zeljeni kontroler, odnosno sadrzaj
 
-'''Ako korisnik pristupi adresi:
-  index.php?rt=con/action, onda ćemo pozvati
-  funkciju action iz kontrolera conController.php.'''
+  // Ako korisnik pristupi adresi:
+  // index.php?rt=con/action, onda ćemo pozvati
+  // funkciju action iz kontrolera conController.php.
 
 if(isset($_GET['rt']))
 {
