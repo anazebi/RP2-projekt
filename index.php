@@ -6,7 +6,7 @@
   // index.php?rt=con/action, onda ćemo pozvati
   // funkciju action iz kontrolera conController.php.
 
-//ako nije postavljen kontroler, pozivamo akciju index iz indexController 
+//ako nije postavljen kontroler, pozivamo akciju index iz indexController
 if(isset($_GET['rt']))
 {
   $route = $_GET['rt'];
@@ -25,7 +25,7 @@ $controllerName = $dijelovi_rute[0] . 'Controller';
 // ako nije postavljena akcija pozivamo funkciju index iz kontrolera $controllerName
 if( isset($dijelovi_rute[1]))
 {
-	$action = $parts[1];
+	$action = $dijelovi_rute[1];
 }
 else
 {
