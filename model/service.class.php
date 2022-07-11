@@ -175,15 +175,29 @@ class Service{
       while($row = $st->fetch())
       {
         $id_proizvoda = $row['id'];
-        $ime_proizvoda = $row['ime'];
-        $popust = $row['popust'];
-        $cijena = $row['cijena'];
-
-        $proizvod = New Product($id_proizvoda, $id_store, $ime_proizvoda, $popust, $cijena);
+        $proizvod = Service::getProductById($id_proizvoda);
         $proizvodi[] = $proizvod;
       }
       return $proizvodi;
     }
+
+    //funkcija za dohvat svih proizvoda na akciji u danoj trgovini
+    //koristimo prethodno napisanu funkcju za dohvat svih proizvoda u trgovini
+    public static function getProductsOnSaleInStore($id_store)
+    {
+      $allproducts = Service::getAllProductsInStore($id_store);
+      $broj_proizvoda = count($allproducts);
+      $onsale = [];
+
+      for($i = 0; i < $broj_proizvoda; $i++)
+      {
+        if($allproducts[$i]->sale !== null)
+          $onsale[] = $allproducts[$i];
+      }
+      return $onsale;
+    }
+
+
 
 };
 ?>
