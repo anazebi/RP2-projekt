@@ -186,7 +186,23 @@ class Service{
 
       return $products;
     }
+	
 
+
+	public function getStoreByName($name)
+	{
+	$db = DB::getConnection();
+      	$st = $db->prepare('SELECT * FROM trgovine WHERE name = :name');
+      	$st->execute(['name' => $name]);
+	
+	$row = $st->fetch();
+      	$name_store = $row['id'];
+
+      	$trgovina = new Store($id_store, $name_store);
+
+      	return $trgovina;
+	
+	}
     // funkcija koja dohvaca trgovinu po identifikatoru
     //koristimo u narednim funkcijama za dohvat trgovina
     public static function getStoreById($id_store)
