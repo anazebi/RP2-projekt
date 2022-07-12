@@ -16,7 +16,7 @@ require_once __DIR__ . '/../model/service.class.php';
     echo '<h2>Rezultati pretraživanja za proizvod <strong style="color:DarkGreen">' . $search . ':</strong></h2>';
 ?>
 
-
+<br>
 <ul class = "popis">
   <form action="index.php?rt=products/sortiraj&imeTrgovine=<?php echo $imeTrgovine; ?>&sale=<?php echo $sale; ?>&search=<?php echo $search; ?>" method="post">
     <p class = "podnaslov">
@@ -33,24 +33,26 @@ require_once __DIR__ . '/../model/service.class.php';
 <?php
 foreach($products as $jedan){
 ?>
-  <p class = "popis">
+  <p class = "popis_proizvoda">
     <?php
-    echo '<p id = "proizvod_' . $jedan->id . '">' . $jedan->product_name . '</p>';
+    echo '<h3 id = "proizvod_' . $jedan->id . '">' . $jedan->product_name;
     if ($jedan->sale !== null)
     {
       $nova = Service::getFinalPrice($jedan);
-      echo '<span class="novo">-' . $jedan->sale . '% </span>';
-      echo '<p class="akcija">' . $jedan->price . 'kn</p>';
-      echo '  Posebna ponuda: <span class = "novo">' . $nova . 'kn</span></li>';
+      echo '<span class="novo">   -' . $jedan->sale . '% </span></h3>';
+      echo '<p class="akcija">Redovna cijena: ' . $jedan->price . 'kn</p>';
+      echo '  Posebna ponuda: <span style="color:red">' . $nova . 'kn</span></li>';
       echo " ";
       echo '<button id="' . $jedan->id . '"class = "dodaj" onClick = "dodaj_proizvod(this.id)">' . 'Dodaj u ceker</button>';
     }
     else{
-      echo '<p>' . $jedan->price . 'kn</p>';
+      echo "</h3>";
+      echo 'Redovna cijena: ' . $jedan->price . 'kn';
       echo '<button id="' . $jedan->id . '"class = "dodaj" onClick = "dodaj_proizvod(this.id)">'.'Dodaj u ceker</button>';
       echo '</a>';
     }
     ?>
+    <hr>
   </p>
 <?php
 }

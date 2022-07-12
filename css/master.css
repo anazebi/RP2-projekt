@@ -104,7 +104,7 @@ a.active {
   margin-top: 10px;
   font-size: 15px;
   padding: 7px;
-  margin-right: 5px;
+  margin-right: 10px;
   margin-left: 5px;
 }
 
@@ -125,6 +125,12 @@ a.active {
   margin-right: 10px;
   margin-left: 5px;
 } */
+
+.novo
+{
+  color: red;
+  margin-left: 12px;
+}
 
  #review_button, .dodaj, .sortiranje, .sort_select
  {
