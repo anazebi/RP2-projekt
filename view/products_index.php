@@ -3,21 +3,19 @@ require_once __DIR__ . '/_headerNav.php';
 require_once __DIR__ . '/../model/service.class.php';
 ?>
 
-<p class = "podnaslov">
+<div class = "products_index">
 <?php
 
 //ispisujemo podnaslove ako je postavljeno ime trgovine ili ime trazenog proizvoda
   if($imeTrgovine !== "")
-      echo 'Dobrodošli u trgovinu ' . $imeTrgovine.'!';
+    echo '<h2>Dobrodošli u  <strong style="color:DarkGreen">' . $imeTrgovine . '</strong> online-prodavaonicu!</h2>';
 ?>
-</p>
 
-<p class = "podnaslov">
-    <?php
-    if($search !== "")
-        echo 'Rezultati pretraživanja za proizvod: ' . $search . '.';
-    ?>
-</p>
+<?php
+  if($search !== "")
+    echo '<h2>Rezultati pretraživanja za proizvod <strong style="color:DarkGreen">' . $search . ':</strong></h2>';
+?>
+
 
 <ul class = "popis">
   <form action="index.php?rt=products/sortiraj&imeTrgovine=<?php echo $imeTrgovine; ?>&sale=<?php echo $sale; ?>&search=<?php echo $search; ?>" method="post">

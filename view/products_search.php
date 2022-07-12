@@ -13,7 +13,7 @@ require_once __DIR__ .'/_headerNav.php';
    </table>
  </form>
 </div>
-
+<br><br><br>
  <?php
 require_once __DIR__ . '/_footer.php';
   ?>
