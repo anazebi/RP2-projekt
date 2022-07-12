@@ -20,7 +20,7 @@ require_once __DIR__ . '/../model/service.class.php';
 <ul class = "popis">
   <form action="index.php?rt=products/sortiraj&imeTrgovine=<?php echo $imeTrgovine; ?>&sale=<?php echo $sale; ?>&search=<?php echo $search; ?>" method="post">
     <p class = "podnaslov"> Sortiranje po:
-      <select name = "sort">
+      <select name = "sort" class = "sort_select">
         <option value = "silazno"> Silazno po cijeni </option>
         <option value = "uzlazno"> Uzlazno po cijeni </option>
       </select>
