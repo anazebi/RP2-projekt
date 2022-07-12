@@ -57,13 +57,13 @@ function dohvati_kosaricu(){
         if(koji === null)koliko++;
 
         else{
-            let span = $('<span>');
+                let span = $('<span>');
                 let but = $('<button onClick="obrisi_proizvod(this.id) "></button>');
 
                 span.append(koji);
                 span.append('<br>');
                 span.prop('id', key);
-                but.append("Obriši iz košarice");
+                but.append("Obrisi iz kosarice");
                 but.prop('id', key);
     
                 span.append(but);
