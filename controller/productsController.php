@@ -51,14 +51,18 @@ class ProductsController{
     public function sortiraj()
     {
         $imeTrgovine = $_GET['imeTrgovine'];
-        $sale = $_GET['sale'];
+
+        if (isset($_GET['sale']) && $_GET['sale'] !== "") $sale = $_GET['sale'];
+        else $sale = false;
+
         if(isset($_POST['sort']))
           $sort = $_POST['sort'];
         else {
           $sort = "";
         }
-        $search = "";
-        $search = $_GET['search'];
+
+        if (isset($_GET['search']) && $_GET['search'] !== "") $search = $_GET['search'];
+        else $search = "";
 
         $products = [];
 
@@ -73,10 +77,10 @@ class ProductsController{
         {
             $store = Service::getStoreByName($imeTrgovine);
             $store_id = $store->id;
-            $proizvodi = Service::getAllProductsInStore($store_id);
+            $products = Service::getAllProductsInStore($store_id);
         }
         //ako je postavljen kriterij pretrage po imenu proizvoda
-        else if($search !== "" && $imeTrgovine==="" && $sale === false){
+        else if($search !== "" && $imeTrgovine === "" && $sale === false){
             $products = Service::getProductByName($search);
         }
         // inace jednostavno dohvacamo sve proizvode na akciji
@@ -85,11 +89,11 @@ class ProductsController{
         }
 
         // ako je postavljen kriterij sortiranja dobivene proizvode sortiramo
-        if($sort === 'uzlazno'){
+        if($sort === "uzlazno"){
             $products = Service::sortByPriceASC($products);
         }
         else if ($sort === "silazno"){
-        $products = Service::sortByPriceDESC($products);
+            $products = Service::sortByPriceDESC($products);
         }
 
         require_once __DIR__.'/../view/products_index.php';
