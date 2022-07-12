@@ -62,14 +62,15 @@ if(isset($_SESSION['logged']))
   if($_SESSION['logged'] === true)
   { ?>
     <form action="index.php?rt=reviews/index&imeTrgovine=<?php echo $imeTrgovine; ?>" method="post">
-    <p>Ocijenite trgovinu: </p>
-    <select name="rating">
+    <p>Ocijenite trgovinu:
+    <select name="rating" id = "rating">
       <option value="1"> 1 </option>
       <option value="2"> 2 </option>
       <option value="3"> 3 </option>
       <option value="4"> 4 </option>
       <option value="5"> 5 </option>
     </select>
+    </p>
     <p>Opišite svoje iskustvo: </p>
     <table>
       <tr>

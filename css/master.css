@@ -108,7 +108,14 @@ a.active {
   margin-left: 5px;
 }
 
-
+#signin2, .password, .username, #rating, .email, #register2
+{
+  font-size: 15px;
+  padding: 7px;
+  margin-right: 10px;
+  margin-left: 5px;
+  margin-top: 5px;
+}
 
 /* #register
 {
@@ -154,7 +161,7 @@ a.active {
   width: 60px;
 }
 
-.allstores, .storeinfo, .search
+.allstores, .storeinfo, .search, #logindiv
 {
   margin-left: 100px;
   text-decoration: none;
