@@ -108,6 +108,8 @@ a.active {
   margin-left: 5px;
 }
 
+
+
 /* #register
 {
   margin-top: 10px;
@@ -139,6 +141,18 @@ a.active {
    margin-right: 10px;
    margin-left: 5px;
  }
+
+ .dodaj
+ {
+   font-size: 15px;
+   padding: 7px;
+   margin-left: 20px;
+ }
+
+.price {
+  display: inline-block;
+  width: 60px;
+}
 
 .allstores, .storeinfo, .search
 {

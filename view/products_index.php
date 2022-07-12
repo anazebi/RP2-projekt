@@ -41,13 +41,12 @@ foreach($products as $jedan){
       $nova = Service::getFinalPrice($jedan);
       echo '<span class="novo">   -' . $jedan->sale . '% </span></h3>';
       echo '<p class="akcija">Redovna cijena: ' . $jedan->price . 'kn</p>';
-      echo '  Posebna ponuda: <span style="color:red">' . $nova . 'kn</span></li>';
-      echo " ";
+      echo 'Posebna ponuda: <span class = "price" style="color:red">' . $nova . 'kn</span>';
       echo '<button id="' . $jedan->id . '"class = "dodaj" onClick = "dodaj_proizvod(this.id)">' . 'Dodaj u ceker</button>';
     }
     else{
       echo "</h3>";
-      echo 'Redovna cijena: ' . $jedan->price . 'kn';
+      echo 'Redovna cijena: <span class = "price">' . $jedan->price . 'kn</span>';
       echo '<button id="' . $jedan->id . '"class = "dodaj" onClick = "dodaj_proizvod(this.id)">'.'Dodaj u ceker</button>';
       echo '</a>';
     }

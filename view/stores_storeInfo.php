@@ -9,12 +9,11 @@ require_once __DIR__ . '/_headerNav.php';
 
         echo '<h2>Dobrodošli u  <strong style="color:DarkGreen">' . $imeTrgovine . '</strong> online-prodavaonicu!</h2>';
         echo '<hr>';
-        echo '<a href="index.php?rt=stores/sviNaAkciji&imeTrgovine=' . $imeTrgovine . '" ><br>';
         if($ocjena !== 0)
-            echo '<b>Prosječna ocjena kupaca:</b> <strong style="color:YellowGreen">' . $ocjena . '</strong><br>';
+            echo '<h3>Prosječna ocjena kupaca: <strong style="color:YellowGreen">' . $ocjena . '</strong></h3>';
         else echo 'Ova trgovina još nema recenzija!';
-        echo "<br>";
-        echo '<p><br> Prikaži proizvode na ovotjednoj akciji' . ' </p>';
+        echo '<a href="index.php?rt=stores/sviNaAkciji&imeTrgovine=' . $imeTrgovine . '" ><br>';
+        echo '<p> Prikaži proizvode na ovotjednoj akciji' . ' </p>';
         echo '</a>';
         echo '<a href="index.php?rt=stores/sviProizvodi&imeTrgovine=' . $imeTrgovine.'" >';
         echo '<p> Pregledaj sve proizvode u prodavaonici'. '</p><br>';
