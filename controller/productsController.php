@@ -3,9 +3,11 @@ require_once __DIR__.'/../model/service.class.php';
 
 class ProductsController{
 
-    //funkcija koja će prikazivati view sa proizvodima na akciji
+
     //vise ce funkcija pozivati isti view pa cemo u ovisnosti o sadržaju varijabli $imeTrgovine, $sort, $sale i $search znati koje porizvode prikazati
     //products_index dobiva listu proizvoda za prikaz u $products te prije navedene varijable
+
+    //funkcija koja će prikazivati view sa proizvodima na akciji
     public function index()
     {
         $products = Service::getProductsOnSale();
