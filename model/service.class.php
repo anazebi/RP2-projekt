@@ -190,16 +190,16 @@ class Service{
   //dohvaćanje trgovine prema imenu
 	public static function getStoreByName($name)
 	{
-	$db = DB::getConnection();
-      	$st = $db->prepare('SELECT * FROM trgovine WHERE naziv = :name');
-      	$st->execute(['name' => $name]);
+	   $db = DB::getConnection();
+     $st = $db->prepare('SELECT * FROM trgovine WHERE naziv = :name');
+     $st->execute(['name' => $name]);
 
-	$row = $st->fetch();
-      	$id = $row['id'];
+	   $row = $st->fetch();
+     $id = $row['id'];
 
-      	$trgovina = new Store($id, $name);
+     $trgovina = new Store($id, $name);
 
-      	return $trgovina;
+     return $trgovina;
 	}
 
     // funkcija koja dohvaca trgovinu po identifikatoru
@@ -417,7 +417,10 @@ class Service{
       {
         $zbroj_ocjena += $reviews[$i]->rating;
       }
-      return $zbroj_ocjena / $broj_recenzija;
+      if($broj_recenzija !== 0)
+        return $zbroj_ocjena / $broj_recenzija;
+      else
+        return 0;
     }
 
 };

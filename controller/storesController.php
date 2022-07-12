@@ -11,34 +11,42 @@ class StoresController{
 
     public function sviProizvodi()
     {
-        $ime_trgovine = $_GET['ime_trgovine'];
-        $id_trgovine = Service::getStoreByName($ime_trgovine);
-        $svi_proizvodi = Service::getAllProductsInStore($id_trgovine);
+        $imeTrgovine = $_GET['imeTrgovine'];
+        $trgovina = Service::getStoreByName($imeTrgovine);
+        $id_trgovine = $trgovina->id;
+        $products = Service::getAllProductsInStore($id_trgovine);
+        $sale = false;
+        $search = "";
         require_once __DIR__.'/../view/products_index.php';
     }
 
     public function sviNaAkciji()
     {
-        $ime_trgovine = $_GET['ime_trgovine'];
-        $id_trgovine = Service::getStoreByName($ime_trgovine);
-        $naAkciji = Service::getProductsOnSaleInStore($id_trgovine);
+        $imeTrgovine = $_GET['imeTrgovine'];
+        $trgovina = Service::getStoreByName($imeTrgovine);
+        $sale = true;
+        $search = "";
+        $id_trgovine = $trgovina->id;
+        $products = Service::getProductsOnSaleInStore($id_trgovine);
         require_once __DIR__.'/../view/products_index.php';
     }
 
     public function storeInfo()
     {
-        $ime_trgovine = $_GET['ime_trgovine'];
-        $trgovina = Service::getStoreByName($ime_trgovine);
+        $imeTrgovine = $_GET['imeTrgovine'];
+        $trgovina = Service::getStoreByName($imeTrgovine);
         $id_trgovine = $trgovina->id;
         $sveRecenzije = Service::getStoreReviews($id_trgovine);
-        $ocjena = Service::getStoreRating($ime_trgovine);
+        $ocjena = Service::getStoreRating($imeTrgovine);
+        $search = "";
+        $sale = false;
+
         require_once __DIR__.'/../view/stores_storeInfo.php';
     }
 
     public function najboljaCijena()
     {
         $sve = $_GET['data'];
-        $proizvodi = explode(',',$p);
         $najboljaTrgovina = Service::getCheapestStoreAndPrice($sve);
         $trgovina = $najboljaTrgovina[0];
         $cijena = $najboljaTrgovina[1];

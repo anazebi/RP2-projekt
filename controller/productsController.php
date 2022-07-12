@@ -44,7 +44,11 @@ class ProductsController{
     {
         $imeTrgovine = $_GET['imeTrgovine'];
         $sale = $_GET['sale'];
-        $sort = $_POST['sort'];
+        if(isset($_POST['sort']))
+          $sort = $_POST['sort'];
+        else {
+          $sort = "";
+        }
         $search = "";
         $search = $_GET['search'];
 
@@ -77,7 +81,7 @@ class ProductsController{
             $products = Service::sortByPriceASC($products);
         }
         else if ($sort === "silazno"){
-            $products = Service::sortByPriceDESC($products);
+        $products = Service::sortByPriceDESC($products);
         }
 
         require_once __DIR__.'/../view/products_index.php';
