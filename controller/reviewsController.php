@@ -1,24 +1,26 @@
 <?php
 
 require_once __DIR__ . '/../model/service.class.php';
+session_start();
 
 class ReviewsController
 {
+  // defaultna funkcija je dodavanje nove recenzije u bazu
   public function index()
   {
     if(isset($_POST['review']) && isset($_POST['rating']))
     {
       $username = $_SESSION['username'];
-      $store_name = $_GET['store_name'];
+      $imeTrgovine = $_GET['imeTrgovine'];
 
-      $prosjecna_ocjena = Service::getStoreRating($store_name);
+      $ocjena = Service::getStoreRating($imeTrgovine);
 
       if($_POST['rating'] !== '' && $_POST['review'] !== '')
       {
         $rating = $_POST['rating'];
         $review = $_POST['review'];
 
-        $store = Service::getStoreByName($store_name);
+        $store = Service::getStoreByName($imeTrgovine);
         $user = Service::getUserbyName($username);
 
         // u bazu dodajemo novu recenziju korisnika
