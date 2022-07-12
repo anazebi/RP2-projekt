@@ -19,10 +19,10 @@ body {
   background-size: 700px;
 }
 
-h1 {
-  text-align: center;
-  font-size: 48px;
-  text-transform: uppercase;
+h2 {
+  text-align: left;
+  font-size: 30px;
+  /* text-transform: uppercase; */
   letter-spacing: 3px;
   color: #222;
 }
@@ -117,7 +117,16 @@ a.active {
   margin-left: 5px;
 }
 
-.allstores, .storeinfo
+#search_button, #search_input
+{
+  margin-top: 10px;
+  font-size: 15px;
+  padding: 7px;
+  margin-right: 10px;
+  margin-left: 5px;
+}
+
+.allstores, .storeinfo, .search
 {
   margin-left: 100px;
   text-decoration: none;

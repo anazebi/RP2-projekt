@@ -2,7 +2,7 @@
 require_once __DIR__ . '/_headerNav.php';
 ?>
 <div class = "allstores">
-<h3>Odaberite prodavaonicu s popisa:</h3>
+<h2>Odaberite prodavaonicu s popisa:</h2>
 <p>Nakon odabira možete saznati više o ponudi prodavaonice te iskustvima kupaca.</p>
 <br>
 <ul class = "stores">
