@@ -26,7 +26,7 @@ class ProductsController{
     {
         if(isset($_POST['search'])){
             $search = $_POST['search'];
-            $products = Service::getProductsByName($search);
+            $products = Service::getProductByName($search);
             $imeTrgovine = "";
             $sort = "";
             $sale = false;
