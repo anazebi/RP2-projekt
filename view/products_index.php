@@ -35,13 +35,14 @@ foreach($products as $jedan){
 ?>
   <p class = "popis_proizvoda">
     <?php
-    echo '<h3 id = "proizvod_' . $jedan->id . '">' . $jedan->product_name;
+    echo '<h3>' . $jedan->product_name;
     if ($jedan->sale !== null)
     {
       $nova = Service::getFinalPrice($jedan);
       echo '<span class="novo">   -' . $jedan->sale . '% </span></h3>';
       echo '<p class="akcija">Redovna cijena: ' . $jedan->price . 'kn</p>';
       echo 'Posebna ponuda: <span class = "price" style="color:red">' . $nova . 'kn</span>';
+      echo '<p hidden id = "proizvod_' . $jedan->id . '">' . $jedan->product_name . '</p>';
       echo '<button id="' . $jedan->id . '"class = "dodaj" onClick = "dodaj_proizvod(this.id)">' . 'Dodaj u ceker</button>';
     }
     else{
