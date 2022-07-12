@@ -187,11 +187,11 @@ class Service{
       return $products;
     }
 
-  //dhvaćanje trgovine prema imenu
-	public function getStoreByName($name)
+  //dohvaćanje trgovine prema imenu
+	public static function getStoreByName($name)
 	{
 	$db = DB::getConnection();
-      	$st = $db->prepare('SELECT * FROM trgovine WHERE name = :name');
+      	$st = $db->prepare('SELECT * FROM trgovine WHERE naziv = :name');
       	$st->execute(['name' => $name]);
 
 	$row = $st->fetch();
@@ -393,8 +393,8 @@ class Service{
     public static function getStoreReviews($store_id)
     {
       $db = DB::getConnection();
-      $st = $db->prepare('SELECT * FROM recenzije WHERE id_trgovina = :store_id');
-      $st->execute(array('store_id' => $store_id));
+      $st = $db->prepare('SELECT * FROM recenzije WHERE id_trgovina = :id');
+      $st->execute(array('id' => $store_id));
 
       $store_reviews = [];
       while($row = $st->fetch())
@@ -415,7 +415,7 @@ class Service{
       $zbroj_ocjena = 0;
       for($i = 0; $i < $broj_recenzija; $i++)
       {
-        $zbroj_ocjena += $reviews[i]->rating;
+        $zbroj_ocjena += $reviews[$i]->rating;
       }
       return $zbroj_ocjena / $broj_recenzija;
     }

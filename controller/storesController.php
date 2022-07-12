@@ -25,12 +25,14 @@ class StoresController{
         require_once __DIR__.'/../view/products_index.php';
     }
 
-    public function reviews()
+    public function storeInfo()
     {
         $ime_trgovine = $_GET['ime_trgovine'];
-        $id_trgovine = Service::getStoreByName($ime_trgovine);
+        $trgovina = Service::getStoreByName($ime_trgovine);
+        $id_trgovine = $trgovina->id;
         $sveRecenzije = Service::getStoreReviews($id_trgovine);
-        require_once __DIR__.'/../view/reviews_index.php';
+        $ocjena = Service::getStoreRating($ime_trgovine);
+        require_once __DIR__.'/../view/stores_storeInfo.php';
     }
 
     public function najboljaCijena()
