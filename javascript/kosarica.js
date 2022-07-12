@@ -39,8 +39,9 @@ function nadi_najpovoljnije(){
         }
     }
 
-    var data = proiz.join(',');
-    window.location = "index.php?rt=stores/najboljaCijena&data="+data; 
+    var cart = proiz.join(',');
+    window.location = "index.php?rt=stores/najboljaCijena&cart="+cart;  
+ 
 }
 
 function dohvati_kosaricu(){
