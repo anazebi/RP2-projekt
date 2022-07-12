@@ -2,12 +2,13 @@
 require_once __DIR__ . '/_headerNav.php';
 ?>
 
-<div class="podnaslov">
+<div class = "storeinfo">
     <?php
 
     if($imeTrgovine !== "")
 
         echo '<h2>Dobrodošli u  <strong style="color:DarkGreen">' . $imeTrgovine . '</strong> online-prodavaonicu!</h2>';
+        echo '<hr>';
         echo '<a href="index.php?rt=stores/sviNaAkciji&imeTrgovine=' . $imeTrgovine . '" >';
         echo '<p><br> Prikaži proizvode na ovotjednoj akciji' . ' </p>';
         echo '</a>';
@@ -18,7 +19,7 @@ require_once __DIR__ . '/_headerNav.php';
             echo 'Prosječna ocjena kupaca: <strong style="color:YellowGreen">' . $ocjena . '</strong><br>';
         else echo 'Ova trgovina još nema recenzija!'
     ?>
-</div>
+<br><br>
 <?php
 
 if($ocjena !== 0)
@@ -91,3 +92,4 @@ else { ?>
 
  require_once __DIR__ . '/_footer.php'
  ?>
+</div>

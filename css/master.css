@@ -116,3 +116,15 @@ a.active {
   margin-right: 10px;
   margin-left: 5px;
 }
+
+.allstores, .storeinfo
+{
+  margin-left: 100px;
+  text-decoration: none;
+}
+
+li.store a, .storeinfo a
+{
+  text-decoration: none;
+  color: black;
+}
