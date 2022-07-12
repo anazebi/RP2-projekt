@@ -10,14 +10,16 @@ require_once __DIR__ . '/_headerNav.php';
         echo '<h2>Dobrodošli u  <strong style="color:DarkGreen">' . $imeTrgovine . '</strong> online-prodavaonicu!</h2>';
         echo '<hr>';
         if($ocjena !== 0)
-            echo '<h3>Prosječna ocjena kupaca: <strong style="color:YellowGreen">' . $ocjena . '</strong></h3>';
+            echo '<h3 style="display:inline-block">Prosječna ocjena kupca: <strong style="color:YellowGreen">' . $ocjena . '</strong></h3>';
         else echo 'Ova trgovina još nema recenzija!';
-        echo '<a href="index.php?rt=stores/sviNaAkciji&imeTrgovine=' . $imeTrgovine . '" ><br>';
-        echo '<p> Prikaži proizvode na ovotjednoj akciji' . ' </p>';
+        echo '<a href="index.php?rt=stores/sviNaAkciji&imeTrgovine=' . $imeTrgovine . '" >';
+        echo '<button class = "trgovina"> Prikaži proizvode na ovotjednoj akciji' . ' </button>';
         echo '</a>';
         echo '<a href="index.php?rt=stores/sviProizvodi&imeTrgovine=' . $imeTrgovine.'" >';
-        echo '<p> Pregledaj sve proizvode u prodavaonici'. '</p><br>';
+        echo '<button class = "trgovina"> Pregledaj sve proizvode u prodavaonici'. '</button>';
         echo '</a>';
+        echo '<hr>';
+        echo '<br>';
     ?>
 <?php
 
@@ -25,7 +27,8 @@ if($ocjena !== 0)
 {
   // za svaku trgovinu korisniku dajemo neke informacije kao sto su prosjecna ocjena korisnika ili pak recenzije korsinika
   ?>
-  <h3> Iskustva kupaca: </h3>
+  <h4 style="color:DarkGreen"> ISKUSTVA KUPACA: </h4>
+  <hr>
   <?php
   foreach ($sveRecenzije as $recenzija) {
     $reviewbyid = $recenzija->user_id;
@@ -45,6 +48,7 @@ if($ocjena !== 0)
         <td> Ocjena: <?php echo $rating; ?> </td>
       </tr>
     </table>
+    <hr>
     </p>
   <?php
   }
@@ -55,7 +59,8 @@ if (session_status() === PHP_SESSION_NONE) session_start();
 //ako je korisnik prijavljen onda moze recenzirati trgovinu
 ?>
 <br>
-<h3> Dodaj vlastitu recenziju: </h3>
+<h4 style="color:DarkGreen"> DODAJ VLASTITU RECENZIJU: </h4>
+<hr>
 <?php
 if(isset($_SESSION['logged']))
 {
@@ -90,7 +95,7 @@ if(isset($_SESSION['logged']))
 }
 else { ?>
   <a href="index.php?rt=login/index">
-    <p>Prijavi se!</p>
+    <button id = "signin3">Prijavi se!</button>
   </a>
 <?php
 }

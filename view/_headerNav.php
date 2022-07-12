@@ -5,7 +5,6 @@
     <title>Špeceraj</title>
     <link rel = "stylesheet" href="css/master.css">
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-    <script type = "text/javascript" src="javascript/naslovnica.js"></script>
     <script type = "text/javascript" src="javascript/usermode.js"></script>
     <script type="text/javascript" src="javascript/kosarica.js"></script>
   </head>

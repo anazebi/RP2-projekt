@@ -48,6 +48,7 @@ foreach($products as $jedan){
     else{
       echo "</h3>";
       echo 'Redovna cijena: <span class = "price">' . $jedan->price . 'kn</span>';
+      echo '<p hidden id = "proizvod_' . $jedan->id . '">' . $jedan->product_name . '</p>';
       echo '<button id="' . $jedan->id . '"class = "dodaj" onClick = "dodaj_proizvod(this.id)">'.'Dodaj u ceker</button>';
       echo '</a>';
     }
