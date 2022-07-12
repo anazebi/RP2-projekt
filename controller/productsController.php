@@ -4,7 +4,7 @@ require_once __DIR__.'/../model/service.class.php';
 class ProductsController{
 
     //funkcija koja će prikazivati view sa proizvodima na akciji
-    //tri ce funkcije pozivati isti view pa cemo u ovisnosti o sadržaju varijabli $imeTrgovine, $sort, $sale i $search znati koje porizvode prikazati
+    //vise ce funkcija pozivati isti view pa cemo u ovisnosti o sadržaju varijabli $imeTrgovine, $sort, $sale i $search znati koje porizvode prikazati
     //products_index dobiva listu proizvoda za prikaz u $products te prije navedene varijable
     public function index()
     {
@@ -16,23 +16,31 @@ class ProductsController{
         require_once __DIR__.'/../view/products_index.php';
     }
 
+    // prikazuje view za pretragu proizvoda
     public function search()
     {
         require_once __DIR__.'/../view/products_search.php';
     }
 
-    // pronalazi trazene proizvode i poziva pripadni view
+    // pronalazi trazeni proizvod i prikazuje pripadni view
     public function searchProducts()
     {
-        if(isset($_POST['search'])){
+        if(isset($_POST['search']) && $_POST['search'] !== ""){
             $search = $_POST['search'];
             $products = Service::getProductByName($search);
             $imeTrgovine = "";
             $sort = "";
             $sale = false;
+            require_once __DIR__.'/../view/products_search.php';
             require_once __DIR__.'/../view/products_index.php';
         }
         else{
+            if(isset($_GET['search']) && $_GET['search'] !== "") $search = $_GET['search'];
+            else $search = "";
+            $products = Service::getProductByName($search);
+            $imeTrgovine = "";
+            $sort = "";
+            $sale = false;
             require_once __DIR__.'/../view/products_search.php';
         }
     }
@@ -87,9 +95,11 @@ class ProductsController{
         require_once __DIR__.'/../view/products_index.php';
     }
 
-    public function kosarica()
+    public function cart()
     {
-        require_once __DIR__.'/../view/products_kosarica.php';
+        $trgovina = "";
+        $cijena = "";
+        require_once __DIR__.'/../view/products_cart.php';
     }
 }
 

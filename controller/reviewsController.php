@@ -6,6 +6,7 @@ session_start();
 class ReviewsController
 {
   // defaultna funkcija je dodavanje nove recenzije u bazu
+  // ako nema što za dodati onda viewu prosljeđuje sve recenzije iz baze spremne za prikaz
   public function index()
   {
     if(isset($_POST['review']) && isset($_POST['rating']))
@@ -28,15 +29,12 @@ class ReviewsController
 
       }
       //dohvatimo sve recenzije za danu trgovinu
-      $store_reviews = Service::getStoreReviews($store->id);
-      $store_comments = [];
+      $sveRecenzije = Service::getStoreReviews($store->id);
+      $search = "";
+      $ocjena = Service::getStoreRating($imeTrgovine);
 
-      foreach ($store_reviews as $store_review) {
-        $commentbyuser = Service::getUserById($store_review->user_id);
-        $commentbyusername = $commentbyuser->username;
-        $store_comments[$commentbyusername] = $store_review;
-      }
 
+      //podatke prosljeđujemo viewu koji prikazuje informacije o trgovini
       require_once __DIR__ . '/../view/stores_storeInfo.php';
     }
   }

@@ -46,7 +46,7 @@ class StoresController{
 
     public function najboljaCijena()
     {
-        $sve = $_GET['data'];
+        $sve = $_GET['cart'];
         $najboljaTrgovina = Service::getCheapestStoreAndPrice($sve);
         $trgovina = $najboljaTrgovina[0];
         $cijena = $najboljaTrgovina[1];

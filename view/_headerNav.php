@@ -30,7 +30,7 @@
     {
       session_start();
     }
-
+    // prijavljenom korisniku dajemo mogućnost odjave
     if(isset($_SESSION['logged']))
     {
       if($_SESSION['logged'] === true)
@@ -40,6 +40,7 @@
         <br><br>
       <?php
       }
+      // ostalim korisnicima mogucnost registracije ili prijave
       else
       {
       ?>

@@ -6,6 +6,7 @@ require_once __DIR__ . '/../model/service.class.php';
 <p class = "podnaslov">
 <?php
 
+//ispisujemo podnaslove ako je postavljeno ime trgovine ili ime trazenog proizvoda
   if($imeTrgovine !== "")
       echo 'Dobrodošli u trgovinu ' . $imeTrgovine.'!';
 ?>
@@ -14,7 +15,7 @@ require_once __DIR__ . '/../model/service.class.php';
 <p class = "podnaslov">
     <?php
     if($search !== "")
-        echo 'Pretraga prema nazivu ' . $search . '.';
+        echo 'Rezultati pretraživanja za proizvod: ' . $search . '.';
     ?>
 </p>
 
