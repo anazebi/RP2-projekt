@@ -40,15 +40,15 @@ function nadi_najpovoljnije(){
     }
 
     var cart = proiz.join(',');
-    window.location = "index.php?rt=stores/najboljaCijena&cart="+cart;  
- 
+    window.location = "index.php?rt=stores/najboljaCijena&cart="+cart;
+
 }
 
 function dohvati_kosaricu(){
 
     let koliko = 0;
     let a = parseInt(localStorage.getItem('kosarica'));
-    let div = $('#cart').html("");
+    let table = $('#cart_table').html("");
     console.log('ima '+ a);
 
     while(a>0){
@@ -58,20 +58,22 @@ function dohvati_kosaricu(){
         if(koji === null)koliko++;
 
         else{
-                let span = $('<span>');
-                let but = $('<button onClick="obrisi_proizvod(this.id) "></button>');
+                let row = $('<tr></tr>');
+                let but = $('<button onClick="obrisi_proizvod(this.id)" class="obrisi"></button>');
 
-                span.append(koji);
-                span.append('<br>');
-                span.prop('id', key);
-                but.append("Obrisi iz kosarice");
+                let cell1 = $('<td style="margin-top: 10px;"></td>');
+                let cell2 = $('<td style="margin-top: 10px;"></td>');
+                cell1.append(koji);
+                cell1.prop('id', key);
                 but.prop('id', key);
-    
-                span.append(but);
-                span.append('<br>');
-                div.append(span);
+                but.html("Ukloni iz košarice");
+                cell2.append(but);
+
+                row.append(cell1);
+                row.append(cell2);
+                table.append(row);
             a--;
-            koliko++;        
+            koliko++;
 	    }
     }
 }

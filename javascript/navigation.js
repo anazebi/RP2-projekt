@@ -5,7 +5,6 @@ $(document).ready(function(){
   // svim navigacijskim karticama na pomak miša preko njih mijenjamo boju
   $("li#navigacija1").on("mouseenter", function(){
     $("li#navigacija1").css("background-color", "#3498db");
-    console.log("uspjelo");
   });
 
   $("li#navigacija2").on("mouseenter", function(){
@@ -20,6 +19,7 @@ $(document).ready(function(){
     $("li#navigacija4").css("background-color", "#16a085");
   });
 
+  // nakon sto mis napusti prostor kartice vracamo njenu boju na defaultnu
   $("li#navigacija1").on("mouseleave", function(){
     $("li#navigacija1").css("background-color", "#2c3e50");
   });
@@ -35,5 +35,4 @@ $(document).ready(function(){
   $("li#navigacija4").on("mouseleave", function(){
     $("li#navigacija4").css("background-color", "#2c3e50");
   });
-
 });

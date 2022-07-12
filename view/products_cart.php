@@ -1,11 +1,13 @@
 <?php
 require_once __DIR__ . '/_headerNav.php';
-
+?>
+<h2 id = "kosarica_naslov">Proizvodi u vašoj košarici:</h2>
+<?php
 if (isset($trgovina) && isset($cijena) && $trgovina !== "" && $cijena !== "")
 {
   ?>
   <div class = "best_offer">
-    <h3> IzraÄunali smo najbolju ponudu za vaÅ¡u koÅ¡aricu: </h3>
+    <h2> Izračunali smo najbolju ponudu za vašu košaricu: </h2>
     <table>
       <tr>
         <td> <?php echo $trgovina; ?> </td>
@@ -18,10 +20,17 @@ if (isset($trgovina) && isset($cijena) && $trgovina !== "" && $cijena !== "")
 // ovaj cemo div oblikovati pomocu javascripta
 ?>
 <div class = "cart" id = "cart">
-<br><br>
+<br>
+<table id = "cart_table">
+
+</table>
 </div>
-<button type="button" id = "find_best_offer">PronaÄ‘i najbolju ponudu!</button>
+<br><br>
+<div class="cart">
+<button type="button" id = "find_best_offer">Pronađi najbolju ponudu!</button>  
+</div>
+
+
 <?php
 require_once __DIR__ . '/_footer.php';
  ?>
-

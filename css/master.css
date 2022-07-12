@@ -159,7 +159,7 @@ h2 {
   margin-bottom: 25px;
 }
 
- #review_button, .dodaj, .sortiranje, .sort_select
+ #review_button, .sortiranje, .sort_select
  {
    font-size: 15px;
    padding: 7px;
@@ -174,7 +174,13 @@ h2 {
   margin-left: 70px;
 }
 
- .dodaj
+ #find_best_offer
+ {
+   font-size: 15px;
+   padding: 7px;
+ }
+
+ .dodaj, .obrisi
  {
    font-size: 15px;
    padding: 7px;
@@ -186,7 +192,7 @@ h2 {
   width: 60px;
 }
 
-.allstores, .storeinfo, .search, #logindiv
+.allstores, .storeinfo, .search, #logindiv, #best_offer, .cart, #kosarica_naslov
 {
   margin-left: 100px;
   text-decoration: none;
