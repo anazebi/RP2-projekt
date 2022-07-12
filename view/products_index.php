@@ -19,7 +19,7 @@ require_once __DIR__ . '/../model/service.class.php';
 
 <ul class = "popis">
   <form action="index.php?rt=products/sortiraj&imeTrgovine=<?php echo $imeTrgovine; ?>&sale=<?php echo $sale; ?>&search=<?php echo $search; ?>" method="post">
-    <p class = "podnaslov"> Sortiranje po:
+    <p class = "podnaslov">
       <select name = "sort" class = "sort_select">
         <option value = "silazno"> Silazno po cijeni </option>
         <option value = "uzlazno"> Uzlazno po cijeni </option>
@@ -27,6 +27,8 @@ require_once __DIR__ . '/../model/service.class.php';
       <button type = "submit" class = "sortiranje"> Sortiraj! </button>
     </p>
   </form>
+  <hr>
+  <br>
 
 <?php
 foreach($products as $jedan){

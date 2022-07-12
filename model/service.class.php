@@ -128,7 +128,7 @@ class Service{
         $popust = $product->price * ($product->sale/100);
         $final_price = $product->price - $popust;
       }
-      return $final_price;
+      return round($final_price,2);
     }
 
     //sortiranje proizvoda uzlazno po cijeni
@@ -418,7 +418,7 @@ class Service{
         $zbroj_ocjena += $reviews[$i]->rating;
       }
       if($broj_recenzija !== 0)
-        return $zbroj_ocjena / $broj_recenzija;
+        return round($zbroj_ocjena / $broj_recenzija, 2);
       else
         return 0;
     }
