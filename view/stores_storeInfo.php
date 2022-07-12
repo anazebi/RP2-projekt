@@ -9,17 +9,17 @@ require_once __DIR__ . '/_headerNav.php';
 
         echo '<h2>Dobrodošli u  <strong style="color:DarkGreen">' . $imeTrgovine . '</strong> online-prodavaonicu!</h2>';
         echo '<hr>';
-        echo '<a href="index.php?rt=stores/sviNaAkciji&imeTrgovine=' . $imeTrgovine . '" >';
+        echo '<a href="index.php?rt=stores/sviNaAkciji&imeTrgovine=' . $imeTrgovine . '" ><br>';
+        if($ocjena !== 0)
+            echo '<b>Prosječna ocjena kupaca:</b> <strong style="color:YellowGreen">' . $ocjena . '</strong><br>';
+        else echo 'Ova trgovina još nema recenzija!';
+        echo "<br>";
         echo '<p><br> Prikaži proizvode na ovotjednoj akciji' . ' </p>';
         echo '</a>';
         echo '<a href="index.php?rt=stores/sviProizvodi&imeTrgovine=' . $imeTrgovine.'" >';
         echo '<p> Pregledaj sve proizvode u prodavaonici'. '</p><br>';
         echo '</a>';
-        if($ocjena !== 0)
-            echo 'Prosječna ocjena kupaca: <strong style="color:YellowGreen">' . $ocjena . '</strong><br>';
-        else echo 'Ova trgovina još nema recenzija!'
     ?>
-<br><br>
 <?php
 
 if($ocjena !== 0)
@@ -55,6 +55,7 @@ if (session_status() === PHP_SESSION_NONE) session_start();
 
 //ako je korisnik prijavljen onda moze recenzirati trgovinu
 ?>
+<br>
 <h3> Dodaj vlastitu recenziju: </h3>
 <?php
 if(isset($_SESSION['logged']))
@@ -71,8 +72,12 @@ if(isset($_SESSION['logged']))
       <option value="5"> 5 </option>
     </select>
     <p>Opišite svoje iskustvo: </p>
-    <textarea name="review" rows="2" cols="50"></textarea>
-    <button type="submit" name="button"> Objavi recenziju </button>
+    <table>
+      <tr>
+        <td> <textarea name="review" rows="2" cols="50"></textarea> </td>
+        <td> <button type="submit" id="review_button"> Objavi recenziju </button> </td>
+      </tr>
+    </table>
     </form>
     <?php
   }

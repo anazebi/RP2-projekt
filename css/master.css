@@ -99,7 +99,7 @@ a.active {
   text-align: right;
 }
 
-#signin
+#signin, #register, #search_input, #search_button, #signout
 {
   margin-top: 10px;
   font-size: 15px;
@@ -108,7 +108,7 @@ a.active {
   margin-left: 5px;
 }
 
-#register
+/* #register
 {
   margin-top: 10px;
   font-size: 15px;
@@ -117,14 +117,22 @@ a.active {
   margin-left: 5px;
 }
 
-#search_button, #search_input
+#search_button, #search_input, #signout
 {
   margin-top: 10px;
   font-size: 15px;
   padding: 7px;
   margin-right: 10px;
   margin-left: 5px;
-}
+} */
+
+ #review_button
+ {
+   font-size: 15px;
+   padding: 7px;
+   margin-right: 10px;
+   margin-left: 5px;
+ }
 
 .allstores, .storeinfo, .search
 {
