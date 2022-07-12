@@ -150,6 +150,14 @@ a.active {
   margin-left: 12px;
 }
 
+#review_text
+{
+  font-size: 15px;
+  padding: 5px;
+  margin-right: 30px;
+  margin-bottom: 25px;
+}
+
  #review_button, .dodaj, .sortiranje, .sort_select
  {
    font-size: 15px;

@@ -79,7 +79,7 @@ if(isset($_SESSION['logged']))
     <p>Opišite svoje iskustvo: </p>
     <table>
       <tr>
-        <td> <textarea name="review" rows="2" cols="50"></textarea> </td>
+        <td> <textarea name="review" rows="3" cols="50" id="review_text"></textarea> </td>
         <td> <button type="submit" id="review_button"> Objavi recenziju </button> </td>
       </tr>
     </table>
