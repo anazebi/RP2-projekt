@@ -11,7 +11,12 @@ html, body {
 
 body {
   font-family: 'PT Sans', Arial, Verdana;
-  background-image: 'naslovnica.jpg';
+  background-color: white;
+  background-image: url("pozadina.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: right;
+  background-size: 700px;
 }
 
 h1 {
