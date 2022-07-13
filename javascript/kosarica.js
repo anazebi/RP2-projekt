@@ -50,7 +50,7 @@ function nadi_najpovoljnije(){
 
 function dohvati_kosaricu(){
 
-    let koliko = 0;
+    let koliko = 1;
     let a = +sessionStorage.getItem('kosarica');
     let table = $('#cart_table').html("");
     console.log('ima '+ a);
@@ -81,6 +81,7 @@ function dohvati_kosaricu(){
             row.append(cell2);
             table.append(row);
             a--;
+            koliko ++;
 	    }
     }
 }
