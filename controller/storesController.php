@@ -47,10 +47,20 @@ class StoresController{
     public function najboljaCijena()
     {
         $sve = $_GET['cart'];
-        $najboljaTrgovina = Service::getCheapestStoreAndPrice($sve);
-        $trgovina = $najboljaTrgovina[0];
-        $cijena = $najboljaTrgovina[1];
-        require_once __DIR__ . '/../view/products_kosarica.php';
+        $proizvodi_id = explode(",", $sve);
+        $proizvodi = [];
+
+        for($i = 0; $i < count($proizvodi_id); $i++)
+        {
+          $id = $proizvodi_id[$i];
+          if ($id !== "")
+            $proizvodi[] = Service::getProductById($id);
+        }
+        $najboljaTrgovina = Service::getCheapestStoreAndPrice($proizvodi);
+
+        $trgovina = $najboljaTrgovina['cheapest_store'];
+        $cijena = $najboljaTrgovina['final_price'];
+        require_once __DIR__ . '/../view/products_cart.php';
     }
 };
 

@@ -14,26 +14,29 @@ function dodaj_proizvod(btn_id){
 
     let t = parseInt(localStorage.getItem('kosarica'));
     t++;
-    let proizvod = $('#proizvod_'+btn_id).html();
+    let proizvod = $('#proizvod_'+btn_id).html() + ',' +  btn_id;
     let key = 'pr_'+ t;
 
     localStorage.setItem(key,proizvod);
     localStorage.setItem('kosarica',t);
-console.log(proizvod+' i kljuc '+key);
+// console.log(proizvod+' i kljuc '+key);
 }
 
 function nadi_najpovoljnije(){
     let koliko = 0;
     let proiz = [];
     let a = parseInt(localStorage.getItem('kosarica'));
+    console.log(a);
 
     while(a){
         let key = 'pr_'+ koliko;
         let koji = localStorage.getItem(key);
+        let polje = "";
+        if (koji !== null) polje = koji.split(",");
 
-        if(koji === null)koliko++;
+        if(koji === null) koliko++;
         else{
-            proiz.push(koji);
+            if(polje[0] !== "") proiz.push(polje[1]);
             a--;
             koliko++;
         }
@@ -51,27 +54,27 @@ function dohvati_kosaricu(){
     let table = $('#cart_table').html("");
     console.log('ima '+ a);
 
-    while(a>0){
+    while(a > 0){
         let key = 'pr_'+ koliko;
         let koji = localStorage.getItem(key);
-	console.log(key + 'bome' + koji);
-        if(koji === null)koliko++;
-
+	// console.log(key + 'bome' + koji);
+        if(koji === null) koliko++;
         else{
-                let row = $('<tr></tr>');
-                let but = $('<button onClick="obrisi_proizvod(this.id)" class="obrisi"></button>');
+            let row = $('<tr></tr>');
+            let but = $('<button onClick="obrisi_proizvod(this.id)" class="obrisi"></button>');
 
-                let cell1 = $('<td style="margin-top: 10px;"></td>');
-                let cell2 = $('<td style="margin-top: 10px;"></td>');
-                cell1.append(koji);
-                cell1.prop('id', key);
-                but.prop('id', key);
-                but.html("Ukloni iz košarice");
-                cell2.append(but);
+            let cell1 = $('<td style="margin-top: 10px;"></td>');
+            let cell2 = $('<td style="margin-top: 10px;"></td>');
 
-                row.append(cell1);
-                row.append(cell2);
-                table.append(row);
+            cell1.append(koji);
+            cell1.prop('id', key);
+            but.prop('id', key);
+            but.html("Ukloni iz košarice");
+            cell2.append(but);
+
+            row.append(cell1);
+            row.append(cell2);
+            table.append(row);
             a--;
             koliko++;
 	    }

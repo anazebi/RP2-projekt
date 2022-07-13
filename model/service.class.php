@@ -330,7 +330,7 @@ class Service{
           }
         }
       }
-      return $rezultat = array('cheapest store' => $cheapest_store, 'final price' => $final_price);
+      return $rezultat = array('cheapest_store' => $cheapest_store, 'final_price' => $final_price);
     }
 
     //dohvacanje korisnika po identifikatoru
