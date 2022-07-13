@@ -5,7 +5,7 @@ $(document).ready( function()
         sessionStorage.setItem('kosarica',0);
     dohvati_kosaricu();
 
-    $('.dodaj').on('click',dodaj_proizvod);
+    $('#dodaj').on('click',dodaj_proizvod);
     $('#find_best_offer').on('click',nadi_najpovoljnije);
 });
 
@@ -81,7 +81,6 @@ function dohvati_kosaricu(){
             row.append(cell2);
             table.append(row);
             a--;
-            koliko++;
 	    }
     }
 }
