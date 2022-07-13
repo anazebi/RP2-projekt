@@ -1,6 +1,10 @@
 $(document).ready( function()
 {
+<<<<<<< HEAD
 	  //sessionStorage.clear();
+=======
+//sessionStorage.clear();
+>>>>>>> aef0fc7d439baa7d856f4ca6a82ed723b37f4a04
     if(sessionStorage.getItem('kosarica')=== null)
         sessionStorage.setItem('kosarica',0);
     dohvati_kosaricu();
@@ -55,7 +59,7 @@ function dohvati_kosaricu(){
     let table = $('#cart_table').html("");
     console.log('ima '+ a);
 
-    while(a > 0){
+    while(a > 0 ){
         let key = 'pr_'+ koliko;
         let koji = sessionStorage.getItem(key);
 
@@ -74,7 +78,7 @@ function dohvati_kosaricu(){
             cell1.append(pro);
             cell1.prop('id', key);
             but.prop('id', key);
-            but.html("Ukloni iz košarice");
+            but.html("Ukloni iz koÅ¡arice");
             cell2.append(but);
 
             row.append(cell1);
