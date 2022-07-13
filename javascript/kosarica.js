@@ -1,8 +1,8 @@
 $(document).ready( function()
 {
-	//localStorage.clear();
-    if(localStorage.getItem('kosarica')=== null)
-        localStorage.setItem('kosarica',0);
+//sessionStorage.clear();
+    if(sessionStorage.getItem('kosarica')=== null)
+        sessionStorage.setItem('kosarica',0);
     dohvati_kosaricu();
 
     $('#dodaj').on('click',dodaj_proizvod);
@@ -12,25 +12,25 @@ $(document).ready( function()
 
 function dodaj_proizvod(btn_id){
 
-    let t = parseInt(localStorage.getItem('kosarica'));
+    let t = parseInt(sessionStorage.getItem('kosarica'));
     t++;
     let proizvod = $('#proizvod_'+btn_id).html() + ',' +  btn_id;
     let key = 'pr_'+ t;
 
-    localStorage.setItem(key,proizvod);
-    localStorage.setItem('kosarica',t);
-// console.log(proizvod+' i kljuc '+key);
+    sessionStorage.setItem(key,proizvod);
+    sessionStorage.setItem('kosarica',t);
+    console.log(proizvod+' i kljuc '+key);
 }
 
 function nadi_najpovoljnije(){
     let koliko = 0;
     let proiz = [];
-    let a = parseInt(localStorage.getItem('kosarica'));
+    let a = parseInt(sessionStorage.getItem('kosarica'));
     console.log(a);
 
-    while(a){
+    while(a > 0){
         let key = 'pr_'+ koliko;
-        let koji = localStorage.getItem(key);
+        let koji = sessionStorage.getItem(key);
         let polje = "";
         if (koji !== null) polje = koji.split(",");
 
@@ -50,14 +50,14 @@ function nadi_najpovoljnije(){
 function dohvati_kosaricu(){
 
     let koliko = 0;
-    let a = parseInt(localStorage.getItem('kosarica'));
+    let a = parseInt(sessionStorage.getItem('kosarica'));
     let table = $('#cart_table').html("");
     console.log('ima '+ a);
 
-    while(a > 0){
+    while(a > 0 ){
         let key = 'pr_'+ koliko;
-        let koji = localStorage.getItem(key);
-	// console.log(key + 'bome' + koji);
+        let koji = sessionStorage.getItem(key);
+	console.log(key + 'bome' + koji);
         if(koji === null) koliko++;
         else{
             let row = $('<tr></tr>');
@@ -69,7 +69,7 @@ function dohvati_kosaricu(){
             cell1.append(koji);
             cell1.prop('id', key);
             but.prop('id', key);
-            but.html("Ukloni iz košarice");
+            but.html("Ukloni iz koÅ¡arice");
             cell2.append(but);
 
             row.append(cell1);
@@ -83,10 +83,11 @@ function dohvati_kosaricu(){
 
 function obrisi_proizvod(id_b){
 
-    localStorage.removeItem(id_b);
-    let t = parseInt(localStorage.getItem('kosarica'));
+    sessionStorage.removeItem(id_b);
+    let t = parseInt(sessionStorage.getItem('kosarica'));
     t--;
     console.log(t);
-    localStorage.setItem('kosarica', t);
+    sessionStorage.setItem('kosarica', t);
     dohvati_kosaricu();
 }
+
