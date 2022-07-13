@@ -17,7 +17,7 @@ function dodaj_proizvod(btn_id){
     let key = 'pr_'+ t;
 
     sessionStorage.setItem(key,proizvod);
-    sessionStorage.setItem('kosarica',t);
+    sessionStorage.setItem('kosarica',''+t);
 
     console.log(proizvod+' i kljuc '+key);
 }
@@ -55,7 +55,7 @@ function dohvati_kosaricu(){
     let table = $('#cart_table').html("");
     console.log('ima '+ a);
 
-    while(a > 0){
+    while(a > 0 ){
         let key = 'pr_'+ koliko;
         let koji = sessionStorage.getItem(key);
 
