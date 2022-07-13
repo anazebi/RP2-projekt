@@ -60,13 +60,15 @@ function dohvati_kosaricu(){
 	// console.log(key + 'bome' + koji);
         if(koji === null) koliko++;
         else{
+            let ime = koji.split(",");
+            let pro = ime[0];
             let row = $('<tr></tr>');
             let but = $('<button onClick="obrisi_proizvod(this.id)" class="obrisi"></button>');
 
             let cell1 = $('<td style="margin-top: 10px;"></td>');
             let cell2 = $('<td style="margin-top: 10px;"></td>');
 
-            cell1.append(koji);
+            cell1.append(pro);
             cell1.prop('id', key);
             but.prop('id', key);
             but.html("Ukloni iz košarice");
