@@ -3,6 +3,7 @@ $(document).ready( function()
 	  //sessionStorage.clear();
     if(sessionStorage.getItem('kosarica')=== null)
         sessionStorage.setItem('kosarica',0);
+
     dohvati_kosaricu();
 
     $('#dodaj').on('click',dodaj_proizvod);
@@ -11,10 +12,12 @@ $(document).ready( function()
 
 function dodaj_proizvod(btn_id){
 
+    let proizvod = $('#proizvod_'+btn_id).html() + ',' +  btn_id;
+    let key = 'pr_'+ koliko;
+    koliko ++;
+
     let t = +sessionStorage.getItem('kosarica');
     t++;
-    let proizvod = $('#proizvod_'+btn_id).html() + ',' +  btn_id;
-    let key = 'pr_'+ t;
 
     sessionStorage.setItem(key,proizvod);
     sessionStorage.setItem('kosarica',''+t);
@@ -23,7 +26,7 @@ function dodaj_proizvod(btn_id){
 }
 
 function nadi_najpovoljnije(){
-    let koliko = 0;
+    koliko = 0;
     let proiz = [];
     let a = +sessionStorage.getItem('kosarica');
 
@@ -50,7 +53,7 @@ function nadi_najpovoljnije(){
 
 function dohvati_kosaricu(){
 
-    let koliko = 1;
+    koliko = 0;
     let a = +sessionStorage.getItem('kosarica');
     let table = $('#cart_table').html("");
     console.log('ima '+ a);
