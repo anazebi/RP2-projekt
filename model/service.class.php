@@ -305,7 +305,6 @@ class Service{
           if ($product->product_name === $product_store->product_name)
           {
             $products_store[] = $product_store;
-            break;
           }
         }
       }
